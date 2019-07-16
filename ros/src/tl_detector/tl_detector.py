@@ -54,7 +54,6 @@ class TLDetector(object):
         
         
         self.upcoming_red_light_pub = rospy.Publisher('/traffic_waypoint', Int32, queue_size=1)
-        self.upcoming_red_light_pub.publish(Int32(5))
         
         self.bridge = CvBridge()
         self.light_classifier = TLClassifier()
@@ -155,11 +154,12 @@ class TLDetector(object):
 
         """
 #        if(not self.has_image):
-#            self.prev_light_loc = None
-#            return False
-#
-#        cv_image = self.bridge.imgmsg_to_cv2(self.camera_image, "bgr8")
+            self.prev_light_loc = None
+            return False
 
+        cv_image = self.bridge.imgmsg_to_cv2(self.camera_image, "bgr8")
+        status = cv2.imwrite('/home/jose/GitHub/Self-Driving-Car-Nanodegree-Capstone/images/img.jpg',cv_image)
+#        rospy.loginfo("Image written to file-system : %r " % status )
         #Get classification
 #        return self.light_classifier.get_classification(cv_image)
         return light.state
@@ -196,6 +196,7 @@ class TLDetector(object):
 
         if closest_light:
             state = self.get_light_state(closest_light)
+            rospy.loginfo("Traffic light state: %r " % state )
             return line_wp_idx, state
   
         return -1, TrafficLight.UNKNOWN
