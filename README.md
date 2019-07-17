@@ -1,3 +1,49 @@
+### Traffic Light classifier
+
+To detect and classify the traffic lights in our camera images we use the [Tensorflow Object Detection API](https://github.com/tensorflow/models/tree/master/research/object_detection). This is a collection of pre-trained models, and high level subroutines that facilitate the use and fine-tuning of these models. The models are compiled in [Tensorflow detection model zoo](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/detection_model_zoo.md), and mainly belong to two object detection methods: SSD (Single Shot Detector) and R-CNN (Regions with CNN).
+
+The utilities to use the models include:
+
+- An inference script in the form of a Jupyter Notebook, to detect objects on an image from a "frozen_inference_graph.pb" ([Object Detection Demo](https://github.com/tensorflow/models/blob/master/research/object_detection/object_detection_tutorial.ipynb))
+- Tools to create TFRecord files from original data ([dataset tools](https://github.com/tensorflow/models/tree/master/research/object_detection/dataset_tools))
+- A training script to fine-tune a pre-trained model with our own dataset, locally or in Google Cloud ([model_main.py](https://github.com/tensorflow/models/blob/master/research/object_detection/model_main.py))
+- A script to export a new "frozen_inference_graph.pb" from a fine-tuned model ([export_inference_graph.py](https://github.com/tensorflow/models/blob/master/research/object_detection/export_inference_graph.py))
+
+The flow to get all this going includes:
+
+- Clone and install tensorflow/models ([Installation](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/installation.md))
+- Try out the tutorial notebook with an off-the-shelf model ([Quick Start: Jupyter notebook for off-the-shelf inference](https://github.com/tensorflow/models/blob/master/research/object_detection/object_detection_tutorial.ipynb))
+- Get our own data into TFRecord files ([Preparing inputs](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/preparing_inputs.md))
+- Get the pre-trained model we want to use ([Tensorflow detection model zoo](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/detection_model_zoo.md))
+- Modify the pipeline.config file to describe our setup ([Configuring an object detection pipeline](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/configuring_jobs.md))
+- Run model_main.py locally: ([Running locally](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_locally.md))
+	- Test with a few train steps just to quickly check everything is working
+	- Export for inference
+	- Try on the tutorial notebook
+- Run model_main.py on Google Cloud Platform (GCP) ([Running on the cloud](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_on_cloud.md)):
+	- Get a Google Cloud account, setup a project and a bucket ([Getting Started](https://cloud.google.com/ml-engine/docs/tensorflow/getting-started-training-prediction))
+	- Install google-cloud-sdk locally ([SDK documentation](https://cloud.google.com/sdk/docs/))
+	- Upload model and data to the bucket, modifying pipeline.config to GCP setup
+	- Package our local tools to send and run on GCP
+	- Create YAML file
+	- Run script on GCP (~ 1.5 hours for train_steps=50000) 
+	- Download new model
+	- Export for inference
+	- Try on the tutorial notebook
+
+
+
+
+
+
+
+
+
+---
+
+---
+
+
 This is the project repo for the final project of the Udacity Self-Driving Car Nanodegree: Programming a Real Self-Driving Car. For more information about the project, see the project introduction [here](https://classroom.udacity.com/nanodegrees/nd013/parts/6047fe34-d93c-4f50-8336-b70ef10cb4b2/modules/e1a23b06-329a-4684-a717-ad476f0d8dff/lessons/462c933d-9f24-42d3-8bdc-a08a5fc866e4/concepts/5ab4b122-83e6-436d-850f-9f4d26627fd9).
 
 Please use **one** of the two installation options, either native **or** docker installation.
