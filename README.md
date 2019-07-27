@@ -13,13 +13,13 @@ Our team is composed by the following members:
 | Jean-Yves	|   jybourdon@hotmail.fr			|
 | Jose Horas	|   jose.horas@gmail.com			|
 
-jh
-
-###Overview
+### Overview
 
 In order to complete the project we program in Python the different ROS nodes described in System architecture. The basic structure is well described in the Udacity Walkthrough, and our implementations follows the given guidelines. This implements the basic functionality of loading the Waypoints that the car has to follow, controlling the car movement along these Waypoints, and stop the car upon encountering a red traffic light.
 
-After laying out the basic ROS functionality, much focus was given to implement the traffic light detection from images collected by the camera, both on the simulator and on the real testing lot. We decided in favor to use a TensorFlow model pre-trained on the task of object detection. 
+After laying out the basic ROS functionality, much focus was given to implement the traffic light detection from images collected by the camera, both on the simulator and on the real testing lot. We decided in favor to use a TensorFlow model pre-trained on the general task of object detection. To fine-tune this model to our task of recognizing traffic lights (red, yellow, and green) we generated thousands of labeled training images. 
+
+The training on those images was done using the [Tensorflow Object Detection API](https://github.com/tensorflow/models/tree/master/research/object_detection) and Google Cloud Platform, as described in Traffic Light Classifier
 
 
 
