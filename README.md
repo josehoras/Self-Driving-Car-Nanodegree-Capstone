@@ -44,11 +44,25 @@ The diagram below shows the subsystem division, as well as the ROS nodes and top
 
 <img src="imgs/final-project-ros-graph-v2.png" width="100%" height="100%" /> 
 
-#### Perception (waypoint_updater.py)
+#### Perception (tl_detector.py)
 
-This node will 
+This node will:
+- find the waypoint of the closest traffic light in front of the car.
+- classify the traffic light state from the camera image in `tl_classifier.py`
+- if the traffic light is red, it will publish its waypoint into the `/traffic_waypoint` topic
 
+#### Planning (waypoint_updater.py)
 
+This node subscribes to the topics:
+- `/base_waypoints`:   publishes a list of all waypoints for the track
+- `/current_pose`: publishes the current position coordinates of our car
+
+and publish a list of waypoints to:
+- `/final_waypoints`: list of the waypoints in front of our car. The number of waypoints is defined by the parameter `LOOKAHEAD_WPS`
+
+#### Control (dbw_node.py)
+
+i'm gettin' outa !
 
 ### Traffic Light Classifier
 
