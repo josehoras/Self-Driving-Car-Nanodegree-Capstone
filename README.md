@@ -18,17 +18,27 @@ Our team is composed by the following members:
 
 In order to complete the project we program in Python the different ROS nodes described in [System architecture](#system-architecture). The basic structure is well described in the Udacity Walkthrough, and our implementations follows the given guidelines. This implements the basic functionality of loading the Waypoints that the car has to follow, controlling the car movement along these Waypoints, and stop the car upon encountering a red traffic light.
 
-After laying out the basic ROS functionality, much focus was given to implement the traffic light detection from images collected by the camera, both on the simulator and on the real testing lot. We decided in favor to use a TensorFlow model pre-trained on the general task of object detection. To fine-tune this model to our task of recognizing traffic lights (red, yellow, and green) we generated thousands of labeled training images. 
+After laying out the basic ROS functionality, much focus was given to implement the traffic light detection from images collected by the camera, both on the simulator and on the real testing lot. We decided in favor to use a TensorFlow model pre-trained on the general task of object detection. 
+
+To fine-tune this model to our task of recognizing traffic lights (red, yellow, and green) we generated thousands of labeled training images. 
 
 The training on those images was done using the Tensorflow Object Detection API and Google Cloud Platform, as described in [Traffic Light Classifier](#traffic-light-classifier).
 
 The integration of our Tensorflow Traffic Light Classifier into the ROS system is described in [Final Integration](#final-integration).
 
-### System architecture
+### System Architecture
+
+The ROS system can be divided in three main subsystems:
+
+- Perception: detects traffic lights and classifies them into red, yellow, green, or unknown
+- Planning: loads the circuit waypoints and update the waypoint list in front of our car
+- Control: makes the car to actually move along the waypoints by controlling the car's throttle, steer, and brake using PID controller and low pass filter
+
+The diagram below shows the subsystem division, as well as the ROS nodes and topics.
 
 <img src="imgs/final-project-ros-graph-v2.png" width="100%" height="100%" /> 
 
-### Traffic Light classifier
+### Traffic Light Classifier
 
 To detect and classify the traffic lights in our camera images we use the [Tensorflow Object Detection API](https://github.com/tensorflow/models/tree/master/research/object_detection). This is a collection of pre-trained models, and high level subroutines that facilitate the use and fine-tuning of these models. The models are compiled in [Tensorflow detection model zoo](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/detection_model_zoo.md), and mainly belong to two object detection methods: SSD (Single Shot Detector) and R-CNN (Regions with CNN).
 
