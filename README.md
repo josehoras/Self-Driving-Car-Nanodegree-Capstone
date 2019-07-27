@@ -1,3 +1,33 @@
+## Project: Program an Autonomous Vehicle
+[![Udacity - Self-Driving Car NanoDegree](https://s3.amazonaws.com/udacity-sdc/github/shield-carnd.svg)](http://www.udacity.com/drive)
+
+In this project we develop a system, using ROS nodes, to implement an autonomous vehicle. This system is tested on the [Udacity simulator](https://github.com/udacity/CarND-Capstone/releases) and will be tested on the real Udacity self-driving car (Carla) on project delivery.
+
+Our team is composed by the following members:
+
+|  Name		| Email Address	|
+|:---------------------------------------:|:---------------------:|
+| Andrei		|   ainfinum@gmail.com			|
+| Yan Wu		|   ianwu521@gmail.com			|
+| Ian Wang 	|   ian.immortal@gmail.com		|
+| Jean-Yves	|   jybourdon@hotmail.fr			|
+| Jose Horas	|   jose.horas@gmail.com			|
+
+###Overview
+
+In order to complete the project we program in Python the different ROS nodes described in System architecture. The basic structure is well described in the Udacity Walkthrough, and our implementations follows the given guidelines. This implements the basic functionality of loading the Waypoints that the car has to follow, controlling the car movement along these Waypoints, and stop the car upon encountering a red traffic light.
+
+After laying out the basic ROS functionality, much focus was given to implement the traffic light detection from images collected by the camera, both on the simulator and on the real testing lot. We decided in favor to use a TensorFlow model pre-trained on the task of object detection. 
+
+
+
+
+
+
+### System architecture
+
+
+
 ### Traffic Light classifier
 
 To detect and classify the traffic lights in our camera images we use the [Tensorflow Object Detection API](https://github.com/tensorflow/models/tree/master/research/object_detection). This is a collection of pre-trained models, and high level subroutines that facilitate the use and fine-tuning of these models. The models are compiled in [Tensorflow detection model zoo](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/detection_model_zoo.md), and mainly belong to two object detection methods: SSD (Single Shot Detector) and R-CNN (Regions with CNN).
