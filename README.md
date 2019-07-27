@@ -12,8 +12,8 @@ Our team is composed by the following members:
 | Ian Wang 	|   ian.immortal@gmail.com		|
 | Jean-Yves	|   jybourdon@hotmail.fr			|
 | Jose Horas	|   jose.horas@gmail.com			|
-.
 
+jh
 
 ###Overview
 
