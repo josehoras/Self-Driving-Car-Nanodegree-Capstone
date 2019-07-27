@@ -31,18 +31,24 @@ The integration of our Tensorflow Traffic Light Classifier into the ROS system i
 The ROS system can be divided in three main subsystems:
 
 - **Perception:** detects traffic lights and classifies them into red, yellow, green, or unknown
-- **Planning**: loads the circuit waypoints and update the waypoint list in front of our car
-- **Control**: makes the car to actually move along the waypoints by controlling the car's throttle, steer, and brake using PID controller and low pass filter
+- **Planning:** loads the circuit waypoints and update the waypoint list in front of our car
+- **Control:** makes the car to actually move along the waypoints by controlling the car's throttle, steer, and brake using PID controller and low pass filter
 
 The diagram below shows the subsystem division, as well as the ROS nodes and topics.
 
 - nodes: are single process within the ROS graph. They correspond in our case to Python files. The main nodes that we worked on, or completed from the Udacity repository, were:
-	- **waypoint_updater.py**: in the planning subsystem
-	- **dbw_node.py**: in the control subsystem
-	- **tl_detector.py**: in the perception subsystem.
+	- **tl_detector.py:** in the perception subsystem.
+	- **waypoint_updater.py:** in the planning subsystem
+	- **dbw_node.py:** in the control subsystem
 - topics: are named buses over which nodes send and receive messages, by subscribing or publishing to them.
 
 <img src="imgs/final-project-ros-graph-v2.png" width="100%" height="100%" /> 
+
+#### Perception (waypoint_updater.py)
+
+This node will 
+
+
 
 ### Traffic Light Classifier
 
