@@ -36,20 +36,23 @@ The ROS system can be divided in three main subsystems:
 
 The diagram below shows the subsystem division, as well as the ROS nodes and topics.
 
-- nodes: are single process within the ROS graph. They correspond in our case to Python files. The main nodes that we worked on, or completed from the Udacity repository, were:
-	- **tl_detector.py:** in the perception subsystem.
-	- **waypoint_updater.py:** in the planning subsystem
-	- **dbw_node.py:** in the control subsystem
+- nodes: are single process within the ROS graph. The main nodes that we worked on, or completed from the Udacity repository, were:
+	- **tl_detector:** in the perception subsystem.
+	- **waypoint_updater:** in the planning subsystem
+	- **dbw_node:** in the control subsystem
 - topics: are named buses over which nodes send and receive messages, by subscribing or publishing to them.
 
 <img src="imgs/final-project-ros-graph-v2.png" width="100%" height="100%" /> 
 
 #### Perception (tl_detector.py)
 
-This node will:
-- find the waypoint of the closest traffic light in front of the car.
-- classify the traffic light state from the camera image in `tl_classifier.py`
-- if the traffic light is red, it will publish its waypoint into the `/traffic_waypoint` topic
+This node subscribes to four topics:
+- `/base_waypoints`: provides the complete list of waypoints for the course.
+- `/current_pose`: determines the vehicle's location.
+- `/image_color`: provides an image stream from the car's camera. 
+- `/vehicle/traffic_lights`: provides the (x, y, z) coordinates of all traffic lights.
+
+This node will find the waypoint of the closest traffic light in front of the car. This point will be described by its index counted from the car (e.g.: the number 12 waypoint ahead of the car position). Then, the state of the traffic light will be acquired from the camera image in `/image_color` using the classifier implementation in `tl_classifier.py`. If the traffic light is red, it will publish the waypoint index into the `/traffic_waypoint` topic
 
 #### Planning (waypoint_updater.py)
 
@@ -64,9 +67,16 @@ The number of waypoints is defined by the parameter `LOOKAHEAD_WPS`. If this par
 
 #### Control (dbw_node.py)
 
-In the control subsystem Udacity provides the node `waypoint_follower.py`. After publishing `/final_waypoints` this node will publish twist commands to the `/twist_cmd` topic, that contain the desired linear and angular velocities.
+In the control subsystem, Udacity provides an Autoware software `waypoint_follower.py`. After publishing `/final_waypoints` this software publishes twist commands to the `/twist_cmd` topic, that contain the desired linear and angular velocities.
 
-`dbw_node.py` subscribes to `/twist_cmd`, `/current_velocity`, and `/vehicle/dbw_enabled`. It passed the messages in these nodes to the `Controller` class from `twist_controller.py`
+`dbw_node.py` subscribes to `/twist_cmd`, `/current_velocity`, and `/vehicle/dbw_enabled`. It passes the messages in these nodes to the `Controller` class from `twist_controller.py`. We implemented here the control of the car, using the provided Yaw Controller, PID Controller, and LowPass Filter.
+
+It is important to perfom the control only when `/vehicle/dbw_enabled` is true. When this topic message is false, it means the car is on manual control. In this condition the PID controller would mistakenly accumulate error.
+
+The calculated throttle, brake, and steering are published to the topics:
+- `/vehicle/throttle_cmd`
+- `/vehicle/brake_cmd`
+- `/vehicle/steering_cmd`
 
 ### Traffic Light Classifier
 
