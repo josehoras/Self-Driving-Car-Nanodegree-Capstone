@@ -36,7 +36,7 @@ The ROS system can be divided in three main subsystems:
 
 The diagram below shows the subsystem division, as well as the ROS nodes and topics.
 
-- node: is a single process within the ROS graph. They correspond in our case to Python files. The main nodes that we worked on, or completed from the Udacity repository, were:
+- nodes: are single process within the ROS graph. They correspond in our case to Python files. The main nodes that we worked on, or completed from the Udacity repository, were:
 	- waypoint_updater.py: in the planning subsystem
 	- dbw_node: in the control subsystem
 	- tl_detector: in the perception subsystem.
