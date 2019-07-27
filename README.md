@@ -54,15 +54,19 @@ This node will:
 #### Planning (waypoint_updater.py)
 
 This node subscribes to the topics:
-- `/base_waypoints`:   publishes a list of all waypoints for the track
-- `/current_pose`: publishes the current position coordinates of our car
+- `/base_waypoints`: list of all waypoints for the track
+- `/current_pose`: the current position coordinates of our car
+- `/traffic_waypoint`: waypoint list of the traffic light in our circuit
 
-and publish a list of waypoints to:
-- `/final_waypoints`: list of the waypoints in front of our car. The number of waypoints is defined by the parameter `LOOKAHEAD_WPS`
+It publishes a list of waypoints in front of our car to the topic `/final_waypoints`. The data in waypoints also includes the desired velocity of the car at the given waypoint. If a red traffic light is detected in front of the car, we modify the desired velocity of the `/final_waypoints` up to it in a way that the car slowly stops at the right place.
+
+The number of waypoints is defined by the parameter `LOOKAHEAD_WPS`. If this parameter is too big, there is a big latency updating the waypoints, in a way that the car gets ahead of the list of way points. This confuses the control of the car, which tries to follow the waypoints. We set for a value of 20, to get rid of this latency while still having enough data to properly control the car.
 
 #### Control (dbw_node.py)
 
-i'm gettin' outa !
+In the control subsystem Udacity provides the node `waypoint_follower.py`. After publishing `/final_waypoints` this node will publish twist commands to the `/twist_cmd` topic, that contain the desired linear and angular velocities.
+
+`dbw_node.py` subscribes to `/twist_cmd`, `/current_velocity`, and `/vehicle/dbw_enabled`. It passed the messages in these nodes to the `Controller` class from `twist_controller.py`
 
 ### Traffic Light Classifier
 
