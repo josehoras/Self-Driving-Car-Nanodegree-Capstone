@@ -13,6 +13,7 @@ Our team is composed by the following members:
 | Jean-Yves	|   jybourdon@hotmail.fr			|
 | Jose Horas	|   jose.horas@gmail.com			|
 
+
 ###Overview
 
 In order to complete the project we program in Python the different ROS nodes described in System architecture. The basic structure is well described in the Udacity Walkthrough, and our implementations follows the given guidelines. This implements the basic functionality of loading the Waypoints that the car has to follow, controlling the car movement along these Waypoints, and stop the car upon encountering a red traffic light.
