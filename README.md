@@ -30,7 +30,7 @@ The integration of our Tensorflow Traffic Light Classifier into the ROS system i
 
 The ROS system can be divided in three main subsystems:
 
-- **Perception**: detects traffic lights and classifies them into red, yellow, green, or unknown
+- **Perception:** detects traffic lights and classifies them into red, yellow, green, or unknown
 - **Planning**: loads the circuit waypoints and update the waypoint list in front of our car
 - **Control**: makes the car to actually move along the waypoints by controlling the car's throttle, steer, and brake using PID controller and low pass filter
 
