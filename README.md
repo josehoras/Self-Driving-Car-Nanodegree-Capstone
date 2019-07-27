@@ -26,7 +26,7 @@ The integration of our Tensorflow Traffic Light Classifier into the ROS system i
 
 ### System architecture
 
-<img src="imgs/final-project-ros-graph-v2.png" width="75%" height="75%" /> 
+<img src="imgs/final-project-ros-graph-v2.png" width="100%" height="100%" /> 
 
 ### Traffic Light classifier
 
