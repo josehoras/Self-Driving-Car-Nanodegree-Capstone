@@ -12,8 +12,9 @@ import cv2
 import yaml
 from scipy.spatial import KDTree
 
-STATE_COUNT_THRESHOLD = 3
+STATE_COUNT_THRESHOLD = 1
 IMG_COUNT_THRESHOLD = 10
+LIGHTS = ['Red', 'Yellow', 'Green', 'Unknown', 'Unknown']
 
 class TLDetector(object):
     def __init__(self):
@@ -130,9 +131,9 @@ class TLDetector(object):
                 elif self.state_count >= STATE_COUNT_THRESHOLD:
                     self.last_state = self.state
                     light_wp = light_wp if state == TrafficLight.RED else -1
-                    self.last_wp = light_wp
-                    rospy.loginfo("Publishing new waypoint")
+                    #rospy.loginfo("Publishing new waypoint")
                     self.upcoming_red_light_pub.publish(Int32(light_wp))
+                    self.last_wp = light_wp
                 else:
                     rospy.loginfo("Publishing old waypoint")
                     self.upcoming_red_light_pub.publish(Int32(self.last_wp))
@@ -200,15 +201,17 @@ class TLDetector(object):
             temp_wp_idx = self.get_closest_waypoint(line[0], line[1])
             # Find closest stop line waypoint index
             d = temp_wp_idx - car_wp_idx
-            if d >= 0 and d< diff:
+            if d >= 0 and d < diff:
                 diff = d
                 closest_light = light
                 line_wp_idx = temp_wp_idx
 
         if closest_light:
-            #rospy.loginfo("Go to classifier")
-            state = self.get_light_state(closest_light)
-            rospy.loginfo("Traffic light state: %r " % state )
+            if diff < 180:
+                state = self.get_light_state(closest_light)
+            else:
+                state = TrafficLight.UNKNOWN
+            rospy.loginfo("Traffic light state: %r, Distance: %r " % (LIGHTS[state], diff))
             return line_wp_idx, state
   
         return -1, TrafficLight.UNKNOWN
