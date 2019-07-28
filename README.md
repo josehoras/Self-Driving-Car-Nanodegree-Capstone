@@ -180,6 +180,8 @@ A|B
 :-:|:-:
 ![alt-text-1](imgs/pre-trained-inference-1.png "title-1") | ![alt-text-2](imgs/pre-trained-inference-2.png "title-2")
 
+
+![alt-text-1](imgs/pre-trained-inference-1.png "title-1") ![alt-text-2](imgs/pre-trained-inference-2.png "title-2")
 ---
 
 The flow to get all this going includes:
