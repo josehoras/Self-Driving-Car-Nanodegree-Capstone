@@ -89,9 +89,9 @@ The Google's [Tensorflow Object Detection API](https://github.com/tensorflow/mod
 Although the goal of the API is to facilitate the fine-tune training of these model, there are still a lot of installation and configuration steps that are not trivial at all. Actually, by the time you have fully trained a model for your purposes you will have gone through a convoluted series of steps, and probably several errors. There is extensive information on the [API Readme](https://github.com/tensorflow/models/blob/master/research/object_detection/README.md). However, this information is general and in some parts lacks detail for our concrete task. So, we find useful to include belowa detailed tutorial describing our experience
 
 On a high level, the steps to take are:
-- [Tensorflow Installation](tensorflow-installation)
-- [Tensorflow Object Detection API Installation](tensorflow-object-detection-api-installation)
-- Choose a model from the Model Zoo
+- [Tensorflow Installation](#tensorflow-installation)
+- [Tensorflow Object Detection API Installation](#tensorflow-object-detection-api-installation)
+- [Choose a model from the Model Zoo](#choose-a-model-from-the-model-zoo)
 - Configure the pipeline.config file
 - Test the training process locally
 - Train with GPUs using Google Cloud Platform (GCP)
@@ -103,6 +103,7 @@ On a high level, the steps to take are:
 
 #### Tensorflow Object Detection API Installation
 
+You find the official reference here: [Installation](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/installation.md)
 
 The API provides the following tools and scripts to help us in this task:
 
@@ -110,6 +111,12 @@ The API provides the following tools and scripts to help us in this task:
 - Tools to create TFRecord files from original data ([dataset tools](https://github.com/tensorflow/models/tree/master/research/object_detection/dataset_tools))
 - A training script to fine-tune a pre-trained model with our own dataset, locally or in Google Cloud ([model_main.py](https://github.com/tensorflow/models/blob/master/research/object_detection/model_main.py))
 - A script to export a new "frozen_inference_graph.pb" from a fine-tuned model ([export_inference_graph.py](https://github.com/tensorflow/models/blob/master/research/object_detection/export_inference_graph.py))
+
+
+#### Choose a model from the Model Zoo
+
+
+---
 
 The flow to get all this going includes:
 
