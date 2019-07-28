@@ -172,7 +172,7 @@ PATH_TO_FROZEN_GRAPH = MODEL_NAME + '/frozen_inference_graph.pb'
 
 As it happens that the COCO dataset includes "Traffic Light" as an object category, when we run the inference script with one of our images, this class will probably be recognized. However, the model as it is will not be able to classify the traffic light state. Below you can see the result on a general picture and on one of our pictures out of the simulator.
 
-<img src="imgs/pre-trained-inference-1.png" width="30%" height="30%" /> <img src="imgs/pre-trained-inference-2.png" width="30%" height="30%" /> 
+<img src="imgs/pre-trained-inference-1.png" width="50%" height="50%" /> <img src="imgs/pre-trained-inference-2.png" width="50%" height="50%" /> 
 
 
 ---
