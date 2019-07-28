@@ -113,12 +113,15 @@ On a high level, the steps to take are:
 	pip install --user matplotlib
 	```
 
- 
-3. Clone the entire [models GitHub repository](https://github.com/tensorflow/models) into your computer. 
+3. Create a new directory ``tensorflow``
+
+4. Clone the entire [models GitHub repository](https://github.com/tensorflow/models) from the``tensorflow`` directory. 
 
 	```git clone https://github.com/tensorflow/models.git```
 	
 	This will take 1.2 GB on disk, as it contains models for many different tasks (NLP, GAN, ResNet...). Our model is found in `/models/research/object_detection/`, and many of the commands below will be input from `/models/research/`
+
+5. 
 
 The API provides the following tools and scripts to help us in this task:
 
