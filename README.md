@@ -89,7 +89,6 @@ The Google's [Tensorflow Object Detection API](https://github.com/tensorflow/mod
 Although the goal of the API is to facilitate the fine-tune training of these model, there are still a lot of installation and configuration steps that are not trivial at all. Actually, by the time you have fully trained a model for your purposes you will have gone through a convoluted series of steps, and probably several errors. There is extensive information on the [API Readme](https://github.com/tensorflow/models/blob/master/research/object_detection/README.md). However, this information is general and in some parts lacks detail for our concrete task. So, we find useful to include belowa detailed tutorial describing our experience
 
 On a high level, the steps to take are:
-- [Tensorflow Installation](#tensorflow-installation)
 - [Tensorflow Object Detection API Installation](#tensorflow-object-detection-api-installation)
 - [Choose a model from the Model Zoo](#choose-a-model-from-the-model-zoo)
 - Configure the pipeline.config file
@@ -97,15 +96,24 @@ On a high level, the steps to take are:
 - Train with GPUs using Google Cloud Platform (GCP)
 - Export the final graph
 
-#### Tensorflow Installation
-
-*I would skip this part, as in linux it is quite straightforward. But maybe we can include the installation steps on windows, if you guys think this is worth it.*
-
 #### Tensorflow Object Detection API Installation
 
-You find the official reference here: [Installation](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/installation.md)
+(You find the official reference here: [Installation](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/installation.md))
 
-But first you need to clone the entire [models GitHub repository](https://github.com/tensorflow/models) into your computer. 
+1. Install TensorFlow
+```pip install tensorflow```
+
+2. Install required libraries
+```
+sudo apt-get install protobuf-compiler python-pil python-lxml python-tk
+pip install --user Cython
+pip install --user contextlib2
+pip install --user jupyter
+pip install --user matplotlib
+```
+
+ 
+3. Clone the entire [models GitHub repository](https://github.com/tensorflow/models) into your computer. 
 
 ```git clone https://github.com/tensorflow/models.git```
 
