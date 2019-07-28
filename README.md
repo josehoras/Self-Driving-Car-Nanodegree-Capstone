@@ -176,8 +176,9 @@ A|B
 :-:|:-:
 <img src="imgs/pre-trained-inference-1.png" width="100%" height="100%" /> | <img src="imgs/pre-trained-inference-2.png" width="100%" height="100%" /> 
 
-
-![alt-text-1](imgs/pre-trained-inference-1.png "title-1") ![alt-text-2](imgs/pre-trained-inference-2.png "title-2")
+A|B
+:-:|:-:
+![alt-text-1](imgs/pre-trained-inference-1.png "title-1") | ![alt-text-2](imgs/pre-trained-inference-2.png "title-2")
 
 ---
 
