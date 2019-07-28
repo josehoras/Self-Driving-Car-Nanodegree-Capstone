@@ -143,7 +143,7 @@ On a high level, the steps to take are:
 	```
 
 8. If you run without errors until here, test your installation with 
-	´´´
+	```
 	python object_detection/builders/model_builder_test.py
 	```
 
