@@ -102,22 +102,21 @@ On a high level, the steps to take are:
 
 1. Install TensorFlow:
 
-```pip install tensorflow```
+	```pip install tensorflow```
 
 2. Install required libraries:
-```
-sudo apt-get install protobuf-compiler python-pil python-lxml python-tk
-pip install --user Cython
-pip install --user contextlib2
-pip install --user jupyter
-pip install --user matplotlib
-```
+	```
+	sudo apt-get install protobuf-compiler python-pil python-lxml python-tk
+	pip install --user Cython
+	pip install --user contextlib2
+	pip install --user jupyter
+	pip install --user matplotlib
+	```
 
  
 3. Clone the entire [models GitHub repository](https://github.com/tensorflow/models) into your computer. 
 
-```git clone https://github.com/tensorflow/models.git```
-
+	```git clone https://github.com/tensorflow/models.git```
 	This will take 1.2 GB on disk, as it contains models for many different tasks (NLP, GAN, ResNet...). Our model is found in `/models/research/object_detection/`, and many of the commands below will be input from `/models/research/`
 
 The API provides the following tools and scripts to help us in this task:
