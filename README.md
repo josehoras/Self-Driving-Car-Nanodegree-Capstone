@@ -98,12 +98,13 @@ On a high level, the steps to take are:
 
 #### Tensorflow Object Detection API Installation
 
-(You find the official reference here: [Installation](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/installation.md))
+	(You find the official reference here: [Installation](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/installation.md))
 
-1. Install TensorFlow
+1. Install TensorFlow:
+
 ```pip install tensorflow```
 
-2. Install required libraries
+2. Install required libraries:
 ```
 sudo apt-get install protobuf-compiler python-pil python-lxml python-tk
 pip install --user Cython
@@ -117,7 +118,7 @@ pip install --user matplotlib
 
 ```git clone https://github.com/tensorflow/models.git```
 
-This will take 1.2 GB on disk, as it contains models for many different tasks (NLP, GAN, ResNet...). Our model is found in `/models/research/object_detection/`, and many of the commands below will be input from `/models/research/`
+	This will take 1.2 GB on disk, as it contains models for many different tasks (NLP, GAN, ResNet...). Our model is found in `/models/research/object_detection/`, and many of the commands below will be input from `/models/research/`
 
 The API provides the following tools and scripts to help us in this task:
 
