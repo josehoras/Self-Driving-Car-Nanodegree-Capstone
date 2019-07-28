@@ -98,7 +98,8 @@ On a high level, the steps to take are:
 
 #### Tensorflow Object Detection API Installation
 
-	(You find the official reference here: [Installation](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/installation.md))
+    (You find the official reference here: [Installation](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/installation.md))
+
 1. Install TensorFlow:
 
 	```pip install tensorflow```
