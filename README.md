@@ -119,9 +119,33 @@ On a high level, the steps to take are:
 
 	```git clone https://github.com/tensorflow/models.git```
 	
-	This will take 1.2 GB on disk, as it contains models for many different tasks (NLP, GAN, ResNet...). Our model is found in `/models/research/object_detection/`, and many of the commands below will be input from `/models/research/`
+	This will take 1.2 GB on disk, as it contains models for many different tasks (NLP, GAN, ResNet...). Our model is found in `/tensorflow/models/research/object_detection/`, and many of the commands below will be input from `/tensorflow/models/research/
 
-5. 
+5. Install COCO API
+	```
+	# From tensorflow/models/research/
+	git clone https://github.com/cocodataset/cocoapi.git
+	cd cocoapi/PythonAPI
+	make
+	cp -r pycocotools <path_to_tensorflow>/models/research/
+	```
+
+6. Compile Protobuf
+	```
+	# From tensorflow/models/research/
+	protoc object_detection/protos/*.proto --python_out=.
+	```
+	
+7. Add libraries to PYTHONPATH
+	```
+	# From tensorflow/models/research/
+	export PYTHONPATH=$PYTHONPATH:`pwd`:`pwd`/slim
+	```
+
+8. If you run without errors until here, test your installation with 
+	´´´
+	python object_detection/builders/model_builder_test.py
+	```
 
 The API provides the following tools and scripts to help us in this task:
 
