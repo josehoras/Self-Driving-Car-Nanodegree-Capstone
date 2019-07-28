@@ -105,6 +105,12 @@ On a high level, the steps to take are:
 
 You find the official reference here: [Installation](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/installation.md)
 
+But first you need to clone the entire [models GitHub repository](https://github.com/tensorflow/models) into your computer. 
+
+```git clone https://github.com/tensorflow/models.git```
+
+This will take 1.2 GB on disk, as it contains models for many different tasks (NLP, GAN, ResNet...). Our model is found in `/models/research/object_detection/`, and many of the commands below will be input from `/models/research/`
+
 The API provides the following tools and scripts to help us in this task:
 
 - An inference script in the form of a Jupyter Notebook, to detect objects on an image from a "frozen_inference_graph.pb" ([Object Detection Demo](https://github.com/tensorflow/models/blob/master/research/object_detection/object_detection_tutorial.ipynb))
