@@ -147,7 +147,7 @@ On a high level, the steps to take are:
 	python object_detection/builders/model_builder_test.py
 	```
 
-The API provides the following tools and scripts to help us in this task:
+Once installed, the API provides the following tools and scripts that we will use to fine-tune a model with our data:
 
 - An inference script in the form of a Jupyter Notebook, to detect objects on an image from a "frozen_inference_graph.pb" ([Object Detection Demo](https://github.com/tensorflow/models/blob/master/research/object_detection/object_detection_tutorial.ipynb))
 - Tools to create TFRecord files from original data ([dataset tools](https://github.com/tensorflow/models/tree/master/research/object_detection/dataset_tools))
@@ -155,7 +155,25 @@ The API provides the following tools and scripts to help us in this task:
 - A script to export a new "frozen_inference_graph.pb" from a fine-tuned model ([export_inference_graph.py](https://github.com/tensorflow/models/blob/master/research/object_detection/export_inference_graph.py))
 
 
-#### Choose a model from the Model Zoo
+#### Choose and test a model from the Model Zoo
+(You find the official reference here: [Tensorflow detection model zoo](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/detection_model_zoo.md))
+
+In the model zoo you find a list of pre-trained models to download, as well as some basic stats regarding accuracy and speed. These models are pre-trained with datasets like the [COCO dataset](http://cocodataset.org/#home) or the [Open Images dataset](https://storage.googleapis.com/openimages/web/index.html). The COCO dataset, for example, consists of more than 200K images, with 1.5 object instances labeled within them, belonging to 80 different object categories.
+
+Each pre-trained model contains:
+- a checkpoint (`model.ckpt.data-00000-of-00001`, `model.ckpt.index`, `model.ckpt.meta`)
+- a frozen graph (`frozen_inference_graph.pb`) to be used for out of the box inference 
+- a config file (`pipeline.config`) 
+
+The pre-trained model can already be tested for inference. As it is not fine-tuned for our requirements (detect traffic lights and classify them into red, yellow, or green), the results will not be satisfactory for us. However is a good exercise to get familiarized with the inference script in the [Object Detection Demo](https://github.com/tensorflow/models/blob/master/research/object_detection/object_detection_tutorial.ipynb) Jupyter notebook. This notebook downloads the model automatically for you. If you download it manually to a directory of your choice, as you will need to work with it when fine-tuning, you can comment out the lines in the "Download Model" section and input the correct local path in
+```
+PATH_TO_FROZEN_GRAPH = MODEL_NAME + '/frozen_inference_graph.pb'
+```
+
+As it happens that the COCO dataset includes "Traffic Light" as an object category, when we run the inference script with one of our images, this class will probably be recognized. However, the model as it is will not be able to classify the traffic light state. Below you can see the result on a general picture and on one of our pictures out of the simulator.
+
+<img src="imgs/pre-trained-inference-1.png" width="100%" height="100%" /> 
+<img src="imgs/pre-trained-inference-2.png" width="100%" height="100%" /> 
 
 
 ---
