@@ -67,7 +67,7 @@ The number of waypoints is defined by the parameter `LOOKAHEAD_WPS`. If this par
 
 #### Control (dbw_node.py)
 
-In the control subsystem, Udacity provides an Autoware software `waypoint_follower.py`. After publishing `/final_waypoints` this software publishes twist commands to the `/twist_cmd` topic, that contain the desired linear and angular velocities.
+In the control subsystem, Udacity provides an [Autoware](https://www.autoware.org/) software `waypoint_follower.py`. After publishing `/final_waypoints` this software publishes twist commands to the `/twist_cmd` topic, that contain the desired linear and angular velocities.
 
 `dbw_node.py` subscribes to `/twist_cmd`, `/current_velocity`, and `/vehicle/dbw_enabled`. It passes the messages in these nodes to the `Controller` class from `twist_controller.py`. We implemented here the control of the car, using the provided Yaw Controller, PID Controller, and LowPass Filter.
 
@@ -176,6 +176,18 @@ General picture|Udacity Simulator
 :-:|:-:
 ![alt-text-1](imgs/pre-trained-inference-1.png "title-1") | ![alt-text-2](imgs/pre-trained-inference-2.png "title-2")
 
+#### Configure the pipeline.config file
+
+
+
+
+
+
+
+
+
+
+---
 
 ---
 
