@@ -199,9 +199,10 @@ The `pipeline.config` file has five sections: model{...}, train_config{...}, tra
 
 If you follow this tutorial, you will first set your paths to your local folders to train the model locally. However, when you go to train the model on the cloud, you have to remember to change the paths to you GCP buckets, as described below.
 
+#### Test the training process locally
 
-
-
+ (You find the [official reference](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_locally.md) here)
+ 
 
 
 ---
