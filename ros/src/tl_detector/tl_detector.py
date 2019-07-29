@@ -13,7 +13,7 @@ import yaml
 from scipy.spatial import KDTree
 
 STATE_COUNT_THRESHOLD = 1
-IMG_COUNT_THRESHOLD = 10
+IMG_COUNT_THRESHOLD = 1
 LIGHTS = ['Red', 'Yellow', 'Green', 'Unknown', 'Unknown']
 
 class TLDetector(object):
@@ -55,11 +55,6 @@ class TLDetector(object):
         else:
             rospy.loginfo("Not using camera")
         
-        rospy.loginfo("Red light: %s" , TrafficLight.RED)
-        rospy.loginfo("Yellow light: %s" , TrafficLight.YELLOW)
-        rospy.loginfo("Green light: %s" , TrafficLight.GREEN)
-        rospy.loginfo("Unknown light: %s" , TrafficLight.UNKNOWN)
-        rospy.loginfo(" ")
         
         self.upcoming_red_light_pub = rospy.Publisher('/traffic_waypoint', Int32, queue_size=1)
         
