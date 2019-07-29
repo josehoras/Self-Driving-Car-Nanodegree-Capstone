@@ -6,7 +6,7 @@ import rospy
 
 class TLClassifier(object):
     def __init__(self):
-        PATH_TO_FROZEN_GRAPH = '/home/jose/GitHubs/model-training/models/new_graph_10/'
+        PATH_TO_FROZEN_GRAPH = 'light_classification/model/sim_model/'
         FROZEN_GRAPH = PATH_TO_FROZEN_GRAPH + 'frozen_inference_graph.pb'
 
         self.graph = tf.Graph()
