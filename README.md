@@ -192,8 +192,12 @@ The `pipeline.config` file has five sections: model{...}, train_config{...}, tra
 - On train_config{...}:
 	- `fine_tune_checkpoint: "PATH_TO_BE_CONFIGURED/model.ckpt"` to the directory where you placed the pre-trained model
 	- `num_steps: 200000` to `num_steps: 20000`
+- On eval_config{...}:
+	- Set `num_examples` to the number of images in your evaluation data
 - On train_input_reader{...} and eval_input_reader{...}
-	- PATH_TO_BE_CONFIGURED placeholders in input_path and label_map_path to your .record file(s) and label_map.pbtxt
+	- `PATH_TO_BE_CONFIGURED` placeholders in `input_path` and `label_map_path` set to your .record files and `label_map.pbtxt`
+
+If you follow this tutorial, you will first set your paths to your local folders to train the model locally. However, when you go to train the model on the cloud, you have to remember to change the paths to you GCP buckets, as described below.
 
 
 
