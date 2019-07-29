@@ -98,7 +98,7 @@ On a high level, the steps to take are:
 
 #### Tensorflow Object Detection API Installation
 
-  (You find the official reference here: [Installation](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/installation.md))
+  (You find the [official reference](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/installation.md) here)
 
 1. Install TensorFlow:
 
@@ -156,7 +156,7 @@ Once installed, the API provides the following tools and scripts that we will us
 
 
 #### Choose and test a model from the Model Zoo
-(You find the official reference here: [Tensorflow detection model zoo](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/detection_model_zoo.md))
+(You find the [official reference](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/detection_model_zoo.md) here)
 
 In the model zoo you find a list of pre-trained models to download, as well as some basic stats regarding accuracy and speed. These models are pre-trained with datasets like the [COCO dataset](http://cocodataset.org/#home) or the [Open Images dataset](https://storage.googleapis.com/openimages/web/index.html). The COCO dataset, for example, consists of more than 200K images, with 1.5 object instances labeled within them, belonging to 80 different object categories.
 
