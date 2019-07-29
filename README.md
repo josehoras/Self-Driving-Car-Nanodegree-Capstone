@@ -178,9 +178,22 @@ General picture|Udacity Simulator
 
 #### Configure the pipeline.config file
 
+ (You find the [official reference](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/configuring_jobs.md) here)
+ 
+The parameters to configure the training and evaluation process are described in the `pipeline.config` file. When you download the model you get the configuration corresponding to the pre-training. 
 
-
-
+The `pipeline.config` file has five sections: model{...}, train_config{...}, train_input_reader{...}, eval_config{...}, and eval_input_reader{...}. These sections contain parameters pertaining to the model training (dropout, dimensions...), and the training and evaluation process and data.
+ 
+ This can be used for our fine-tuning with some modifications:
+ 
+- On model{...}:
+	- Change `num_classes: 90` to the number of classes that we are going to train the model on. In our case these are the four described in our `label_map.pbtxt`, ('red', 'green', 'yellow', 'unknown')
+	- `max_detections_per_class: 100` and `max_total_detections: 300` to `max_detections_per_class: 10` and `max_total_detections: 10`
+- On train_config{...}:
+	- `fine_tune_checkpoint: "PATH_TO_BE_CONFIGURED/model.ckpt"` to the directory where you placed the pre-trained model
+	- `num_steps: 200000` to `num_steps: 20000`
+- On train_input_reader{...} and eval_input_reader{...}
+	- PATH_TO_BE_CONFIGURED placeholders in input_path and label_map_path to your .record file(s) and label_map.pbtxt
 
 
 
