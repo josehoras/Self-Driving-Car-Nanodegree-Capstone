@@ -105,7 +105,7 @@ On a high level, the steps to take are:
 - [Train with GPUs using Google Cloud Platform (GCP)](#train-with-gpus-using-google-cloud-platform-gcp)
 - Export the final graph
 
-#### Tensorflow Object Detection API Installation
+### Tensorflow Object Detection API Installation
 
   (You find the [official reference](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/installation.md) here)
 
@@ -164,7 +164,7 @@ Once installed, the API provides the following tools and scripts that we will us
 - A script to export a new "frozen_inference_graph.pb" from a fine-tuned model ([export_inference_graph.py](https://github.com/tensorflow/models/blob/master/research/object_detection/export_inference_graph.py))
 
 
-#### Choose and test a model from the Model Zoo
+### Choose and test a model from the Model Zoo
 (You find the [official reference](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/detection_model_zoo.md) here)
 
 In the model zoo you find a list of pre-trained models to download, as well as some basic stats regarding accuracy and speed. These models are pre-trained with datasets like the [COCO dataset](http://cocodataset.org/#home) or the [Open Images dataset](https://storage.googleapis.com/openimages/web/index.html). The COCO dataset, for example, consists of more than 200K images, with 1.5 object instances labeled within them, belonging to 80 different object categories.
@@ -185,7 +185,7 @@ General picture|Udacity Simulator
 :-:|:-:
 ![alt-text-1](imgs/pre-trained-inference-1.png "title-1") | ![alt-text-2](imgs/pre-trained-inference-2.png "title-2")
 
-#### Configure the pipeline.config file
+### Configure the pipeline.config file
 
  (You find the [official reference](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/configuring_jobs.md) here)
  
@@ -208,7 +208,7 @@ The `pipeline.config` file has five sections: model{...}, train_config{...}, tra
 
 If you follow this tutorial, you will first set your paths to your local folders to train the model locally. However, when you go to train the model on the cloud, you have to remember to change the paths to you GCP buckets, as described below.
 
-#### Test the training process locally
+### Test the training process locally
 
  (You find the [official reference](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_locally.md) here)
  
@@ -239,7 +239,7 @@ python object_detection/model_main.py \
     --alsologtostderr
 ```
 
-#### Train with GPUs using Google Cloud Platform (GCP)
+### Train with GPUs using Google Cloud Platform (GCP)
 
  (You find the [official reference](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_on_cloud.md) here)
 
