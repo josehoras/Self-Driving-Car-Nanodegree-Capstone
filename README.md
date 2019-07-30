@@ -243,8 +243,59 @@ python object_detection/model_main.py \
 
  (You find the [official reference](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_on_cloud.md) here)
 
-Although you can use any cloud service like Amazon's AWS or Microsoft's Azure, we though Google Cloud would have better compatibility with Google's Tensorflow API. To use it you first need to setup your own GCP account. 
+Although you can use any cloud service like Amazon's AWS or Microsoft's Azure, we though Google Cloud would have better compatibility with Google's Tensorflow API. To use it you first need to setup your own GCP account. You will get 200$ of credit with your new GCP account, which will be more than enough to do all the work in this tutorial.
 
+The details of setting up your GCP account (not trivial) are out of the scope of this tutorial, but you basically need to create a project, where your work will be executed, and a bucket, where your data will be stored. Check the following official documentation:
+- [Getting started](https://cloud.google.com/gcp/getting-started/)
+- [Create a Linux VM](https://cloud.google.com/compute/docs/quickstart-linux)
+- [Create a bucket](https://cloud.google.com/storage/docs/quickstart-console)
+- [Train a TensorFlow Model](https://cloud.google.com/ml-engine/docs/tensorflow/getting-started-training-prediction)
+
+After this, running a training work on the cloud is very similar to running it locally, with the following additional steps:
+- Packaging: The script are currently stored in your computer, not on the cloud. At running time you will send them to the cloud and run it there. This will be sent in the form of packages that you create by:
+```
+# From tensorflow/models/research/
+bash object_detection/dataset_tools/create_pycocotools_package.sh /tmp/pycocotools
+python setup.py sdist
+(cd slim && python setup.py sdist)
+```
+- Create YAML configuration file: this file describes the GPUs setup you will use on the cloud. You can just create a text file with the following content:
+```
+trainingInput:
+  runtimeVersion: "1.12"
+  scaleTier: CUSTOM
+  masterType: standard_gpu
+  workerCount: 9
+  workerType: standard_gpu
+  parameterServerCount: 3
+  parameterServerType: standard
+```
+- Upload your data and pre-trained model to your bucket: you can either use the command line with `gsutil cp ...` or the web GUI on your buckets page.
+- Modify and upload your `pipeline.config`: change the paths for the model and data to the corresponding location in your bucket in the form `gs://PRE-TRAINED_MODEL_DIR` and `gs://DATA_DIR`
+- Define or redefine the following environment variable in your terminal:
+```
+PIPELINE_CONFIG_PATH={path to pipeline config file}
+MODEL_DIR={path to fine-tuned model directory}
+NUM_TRAIN_STEPS=50000
+SAMPLE_1_OF_N_EVAL_EXAMPLES=1
+```
+- Send the training job to the cloud with the command:
+```
+# From tensorflow/models/research/
+gcloud ml-engine jobs submit training object_detection_`date +%m_%d_%Y_%H_%M_%S` \
+    --runtime-version 1.12 \
+    --job-dir=gs://${MODEL_DIR} \
+    --packages dist/object_detection-0.1.tar.gz,slim/dist/slim-0.1.tar.gz,/tmp/pycocotools/pycocotools-2.0.tar.gz \
+    --module-name object_detection.model_main \
+    --region us-central1 \
+    --config ${PATH_TO_LOCAL_YAML_FILE} \
+    -- \
+    --model_dir=gs://${MODEL_DIR} \
+    --pipeline_config_path=gs://${PIPELINE_CONFIG_PATH}
+    --num_train_steps=${NUM_TRAIN_STEPS}
+    --sample_1_of_n_eval_examples=$SAMPLE_1_OF_N_EVAL_EXAMPLES
+    --alsologtostderr
+```
 
 
 ---
