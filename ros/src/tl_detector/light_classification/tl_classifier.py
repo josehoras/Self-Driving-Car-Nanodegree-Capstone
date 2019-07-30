@@ -89,14 +89,15 @@ class TLClassifier(object):
             # Filter boxes with a confidence score less than `confidence_cutoff`
             boxes, scores, classes = self.filter_boxes(confidence_cutoff, boxes, scores, classes)
         
-        # rospy.loginfo("Classes: %r, Scores: %r", classes, scores)
         # Write image to disk
-        image = np.dstack((image[:, :, 2], image[:, :, 1], image[:, :, 0]))
-        status = cv2.imwrite('/home/jose/GitHub/Self-Driving-Car-Nanodegree-Capstone/images/img_raw.jpg', image)
-        width, height = image.shape[1], image.shape[0]
-        box_coords = self.to_image_coords(boxes, height, width) 
-        self.draw_boxes(image, box_coords, classes, scores)
-        status = cv2.imwrite('/home/jose/GitHub/Self-Driving-Car-Nanodegree-Capstone/images/img.jpg', image)
+        write = False
+        if write:
+            image = np.dstack((image[:, :, 2], image[:, :, 1], image[:, :, 0]))
+            cv2.imwrite('/home/jose/GitHub/Self-Driving-Car-Nanodegree-Capstone/images/img_raw.jpg', image)
+            width, height = image.shape[1], image.shape[0]
+            box_coords = self.to_image_coords(boxes, height, width) 
+            self.draw_boxes(image, box_coords, classes, scores)
+            cv2.imwrite('/home/jose/GitHub/Self-Driving-Car-Nanodegree-Capstone/images/img.jpg', image)
         
         
         if len(scores)>0:
