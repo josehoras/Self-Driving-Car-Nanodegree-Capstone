@@ -329,13 +329,13 @@ python object_detection/export_inference_graph.py \
     --output_directory=${EXPORT_DIR}
 ```
 
-You have now in your ${EXPORT_DIR} the frozen graph `frozen_inference_graph.pb`. This file, together with you new  `label_map.pbtxt`, is the input to the Jupyter notebook as described in section [ii. Choose and test a model from the Model Zoo](#ii-choose-and-test-a-model-from-the-model-zoo).
+You have now in your ${EXPORT_DIR} the frozen graph `frozen_inference_graph.pb`. This file, together with you new `label_map.pbtxt`, is the input to the Jupyter notebook as described in section [ii. Choose and test a model from the Model Zoo](#ii-choose-and-test-a-model-from-the-model-zoo). We got the following results:
 
 General picture|Udacity Simulator
 :-:|:-:
 ![alt-text-1](imgs/pre-trained-inference-1.png "title-1") | ![alt-text-2](imgs/pre-trained-inference-3.png "title-3")
 
-
+As you can see, now instead of "Traffic light" we get the traffic light status as defined in our `label_map.pbtxt` :)
 
 
 
