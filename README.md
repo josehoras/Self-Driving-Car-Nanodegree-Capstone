@@ -16,12 +16,12 @@ Our team is composed by the following members:
 
 ## Table of Contents
 
-1. [Overview](#1overview)
-2. [System Architecture](#system-architecture)
-	1. [Perception (tl_detector.py)](#perception-tl_detectorpy)
-	2. [Planning (waypoint_updater.py)](#planning-waypoint_updaterpy)
-	3. [Control (dbw_node.py)](#control-dbw_nodepy)
-3. [Traffic Light Classifier](#traffic-light-classifier)
+1. [Overview](#1-overview)
+2. [System Architecture](#2-system-architecture)
+	1. [Perception (tl_detector.py)](#i-perception-tl_detectorpy)
+	2. [Planning (waypoint_updater.py)](#ii-planning-waypoint_updaterpy)
+	3. [Control (dbw_node.py)](#iii-control-dbw_nodepy)
+3. [Traffic Light Classifier](#3-traffic-light-classifier)
 
 ## 1. Overview
 
@@ -35,7 +35,7 @@ The training on those images was done using the Tensorflow Object Detection API 
 
 The integration of our Tensorflow Traffic Light Classifier into the ROS system is described in [Final Integration](#final-integration).
 
-### System Architecture
+## 2. System Architecture
 
 The ROS system can be divided in three main subsystems:
 
@@ -53,7 +53,7 @@ The diagram below shows the subsystem division, as well as the ROS nodes and top
 
 <img src="imgs/final-project-ros-graph-v2.png" width="100%" height="100%" /> 
 
-#### Perception (tl_detector.py)
+### i. Perception (tl_detector.py)
 
 This node subscribes to four topics:
 - `/base_waypoints`: provides the complete list of waypoints for the course.
@@ -63,7 +63,7 @@ This node subscribes to four topics:
 
 This node will find the waypoint of the closest traffic light in front of the car. This point will be described by its index counted from the car (e.g.: the number 12 waypoint ahead of the car position). Then, the state of the traffic light will be acquired from the camera image in `/image_color` using the classifier implementation in `tl_classifier.py`. If the traffic light is red, it will publish the waypoint index into the `/traffic_waypoint` topic. This information will be taken by the Planning subsystem to define the desired velocity at the next sequence of waypoints.
 
-#### Planning (waypoint_updater.py)
+### ii. Planning (waypoint_updater.py)
 
 This node subscribes to the topics:
 - `/base_waypoints`: list of all waypoints for the track
@@ -74,7 +74,7 @@ It publishes a list of waypoints in front of our car to the topic `/final_waypoi
 
 The number of waypoints is defined by the parameter `LOOKAHEAD_WPS`. If this parameter is too big, there is a big latency updating the waypoints, in a way that the car gets ahead of the list of way points. This confuses the control of the car, which tries to follow the waypoints. We set for a value of 20, to get rid of this latency while still having enough data to properly control the car.
 
-#### Control (dbw_node.py)
+### iii. Control (dbw_node.py)
 
 In the control subsystem, Udacity provides an [Autoware](https://www.autoware.org/) software `waypoint_follower.py`. After publishing `/final_waypoints` this software publishes twist commands to the `/twist_cmd` topic, that contain the desired linear and angular velocities.
 
@@ -87,7 +87,7 @@ The calculated throttle, brake, and steering are published to the topics:
 - `/vehicle/brake_cmd`
 - `/vehicle/steering_cmd`
 
-### Traffic Light Classifier
+## 3. Traffic Light Classifier
 
 The state of the traffic light in front of the car has to be extracted from the camera's images, both on the simulator and at the real site. Different methods of image recognition can be used. We decided to use Deep Learning in the form of a model pre-trained on the general task of object detection. While previously, in this Udacity nanodegree, we defined a model from scratch and trained it for traffic sign classification, object detection also includes the capability of locating an object within an image and delimiting its position on a bounding box. Only this way can we extract from the camera image the state of one or several traffic light within the landscape in front of us.
 
