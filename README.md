@@ -243,7 +243,7 @@ python object_detection/model_main.py \
 
  (You find the [official reference](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_on_cloud.md) here)
 
-
+Although you can use any cloud service like Amazon's AWS or Microsoft's Azure, we though Google Cloud would have better compatibility with Google's Tensorflow API. To use it you first need to setup your own GCP account. 
 
 
 
