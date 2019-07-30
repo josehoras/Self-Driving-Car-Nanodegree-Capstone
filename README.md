@@ -307,6 +307,34 @@ After this, running a training work on the cloud is very similar to running it l
 
  (You find the [official reference](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/exporting_models.md) here)
 
+You are now almost ready to test your fine-trained model! First download the new model in `gs://${MODEL_DIR}` to your computer. From this model you will create the frozen graph `frozen_inference_graph.pb` that will be the new input to the [Object Detection Demo](https://github.com/tensorflow/models/blob/master/research/object_detection/object_detection_tutorial.ipynb) Jupyter notebook.
+
+Exporting is done using the script `export_inference_graph.py` in `tensorflow/models/research/object_detection/`. This script also needs the following parameters to be sent in the command line.
+
+```
+INPUT_TYPE=image_tensor
+PIPELINE_CONFIG_PATH={path to pipeline config file}
+TRAINED_CKPT_PREFIX={path to model.ckpt}
+EXPORT_DIR={path to folder that will be used for export}
+```
+
+Finally, you can run the script using Python from the command line:
+
+```
+# From the tensorflow/models/research/ directory
+python object_detection/export_inference_graph.py \
+    --input_type=${INPUT_TYPE} \
+    --pipeline_config_path=${PIPELINE_CONFIG_PATH} \
+    --trained_checkpoint_prefix=${TRAINED_CKPT_PREFIX} \
+    --output_directory=${EXPORT_DIR}
+```
+
+You have now in your ${EXPORT_DIR} the frozen graph `frozen_inference_graph.pb`. This file, together with you new  `label_map.pbtxt`, is the input to the Jupyter notebook as described in section [ii. Choose and test a model from the Model Zoo](#ii-choose-and-test-a-model-from-the-model-zoo).
+
+General picture|Udacity Simulator
+:-:|:-:
+![alt-text-1](imgs/pre-trained-inference-1.png "title-1") | ![alt-text-2](imgs/pre-trained-inference-3.png "title-3")
+
 
 
 
