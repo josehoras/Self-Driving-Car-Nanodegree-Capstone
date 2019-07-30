@@ -17,17 +17,20 @@ Our team is composed by the following members:
 ## Table of Contents
 
 1. [Overview](#1-overview)
-2. [ROS System Architecture](#2-ros-system-architecture)
+2. [Workaround to avoid simulator latency issue with camera on](#workaround-to-avoid-simulator-latency-issue-with-camera-on)
+3. [ROS System Architecture](#2-ros-system-architecture)
 	1. [Perception (tl_detector.py)](#i-perception-tl_detectorpy)
 	2. [Planning (waypoint_updater.py)](#ii-planning-waypoint_updaterpy)
 	3. [Control (dbw_node.py)](#iii-control-dbw_nodepy)
-3. [Traffic Light Classifier](#3-traffic-light-classifier)
+4. [Datasets](#datasets)
+5. [Traffic Light Classifier](#3-traffic-light-classifier)
 	1. [Tensorflow Object Detection API Installation](#i-tensorflow-object-detection-api-installation)
 	2. [Choose and test a model from the Model Zoo](#ii-choose-and-test-a-model-from-the-model-zoo)
 	3. [Configure the pipeline.config file](#iii-configure-the-pipelineconfig-file)
 	4. [Test the training process locally](#iv-test-the-training-process-locally)
 	5. [Train with GPUs using Google Cloud Platform (GCP)](#v-train-with-gpus-using-google-cloud-platform-gcp)
 	6. [Export and test the final graph](#vi-export-and-test-the-final-graph)
+6. [Final Integration]#final-integration)
 
 ## 1. Overview
 
@@ -41,7 +44,9 @@ The training on those images was done using the Tensorflow Object Detection API 
 
 The integration of our Tensorflow Traffic Light Classifier into the ROS system is described in [Final Integration](#final-integration).
 
-## 2. ROS System Architecture
+## 2. Workaround to avoid simulator latency issue with camera on
+
+## 3. ROS System Architecture
 
 The ROS system can be divided in three main subsystems:
 
@@ -93,7 +98,10 @@ The calculated throttle, brake, and steering are published to the topics:
 - `/vehicle/brake_cmd`
 - `/vehicle/steering_cmd`
 
-## 3. Traffic Light Classifier
+## 4. Datasets
+
+
+## 5. Traffic Light Classifier
 
 The state of the traffic light in front of the car has to be extracted from the camera's images, both on the simulator and at the real site. Different methods of image recognition can be used. We decided to use Deep Learning in the form of a model pre-trained on the general task of object detection. While previously, in this Udacity nanodegree, we defined a model from scratch and trained it for traffic sign classification, object detection also includes the capability of locating an object within an image and delimiting its position on a bounding box. Only this way can we extract from the camera image the state of one or several traffic light within the landscape in front of us.
 
@@ -101,7 +109,7 @@ Several Deep Learning methods for [object detection](https://en.wikipedia.org/wi
 
 The Google's [Tensorflow Object Detection API](https://github.com/tensorflow/models/tree/master/research/object_detection) provides a great framework to implement our traffic light classifier. This is a collection of pre-trained models and high level subroutines that facilitate the use and fine-tuning of these models. The models are compiled in [Tensorflow detection model zoo](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/detection_model_zoo.md), belonging mainly to the SSD and Faster R-CNN methods.
 
-Although the goal of the API is to facilitate the fine-tune training of these model, there are still a lot of installation and configuration steps that are not trivial at all. Actually, by the time you have fully trained a model for your purposes you will have gone through a convoluted series of steps, and probably several errors. There is extensive information on the [API Readme](https://github.com/tensorflow/models/blob/master/research/object_detection/README.md). However, this information is general and in some parts lacks detail for our concrete task. So, we find useful to include belowa detailed tutorial describing our experience
+Although the goal of the API is to facilitate the fine-tune training of these model, there are still a lot of installation and configuration steps that are not trivial at all. Actually, by the time you have fully trained a model for your purposes you will have gone through a convoluted series of steps, and probably several errors. There is extensive information on the [API Readme](https://github.com/tensorflow/models/blob/master/research/object_detection/README.md). However, this information is general and in some parts lacks detail for our concrete task. So, we find useful to include below a detailed tutorial describing our experience
 
 On a high level, the steps to take are:
 - [i. Tensorflow Object Detection API Installation](#i-tensorflow-object-detection-api-installation)
@@ -335,7 +343,17 @@ General picture|Udacity Simulator
 :-:|:-:
 ![alt-text-1](imgs/pre-trained-inference-1.png "title-1") | ![alt-text-2](imgs/pre-trained-inference-3.png "title-3")
 
-As you can see, now instead of "Traffic light" we get the traffic light status as defined in our `label_map.pbtxt` :)
+As you can see, now instead of "traffic light" we get the traffic light status as defined in our `label_map.pbtxt` :)
+
+## 6. Final Integration
+
+
+
+
+
+
+
+
 
 
 
