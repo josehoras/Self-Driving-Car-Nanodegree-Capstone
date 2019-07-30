@@ -370,7 +370,7 @@ As you can see, now instead of "traffic light" we get the traffic light status a
 
 ## 6. Final Integration
 
-The ROS system provided by Udacity reserves a space to implement the classifier in the file `tl_classifier.py`.
+The ROS system provided by Udacity reserves a space to implement the classifier. You find our implementation  in [tl_classifier.py](/ros/src/tl_detector/light_classification/tl_classifier.py).
 
 The classifier can be implemented here with the same logic as the Object Detection Jupyter Notebook discussed above. However our implementation resembles more closely the [Udacity Object Detection Lab](https://github.com/udacity/CarND-Object-Detection-Lab). The two implementations are equivalent, but the latter is simpler, easier to read, and quicker.
 
