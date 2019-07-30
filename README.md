@@ -17,7 +17,7 @@ Our team is composed by the following members:
 ## Table of Contents
 
 1. [Overview](#1-overview)
-2. [System Architecture](#2-system-architecture)
+2. [ROS System Architecture](#2-ros-system-architecture)
 	1. [Perception (tl_detector.py)](#i-perception-tl_detectorpy)
 	2. [Planning (waypoint_updater.py)](#ii-planning-waypoint_updaterpy)
 	3. [Control (dbw_node.py)](#iii-control-dbw_nodepy)
@@ -41,7 +41,7 @@ The training on those images was done using the Tensorflow Object Detection API 
 
 The integration of our Tensorflow Traffic Light Classifier into the ROS system is described in [Final Integration](#final-integration).
 
-## 2. System Architecture
+## 2. ROS System Architecture
 
 The ROS system can be divided in three main subsystems:
 
