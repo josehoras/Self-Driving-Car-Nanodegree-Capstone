@@ -22,6 +22,12 @@ Our team is composed by the following members:
 	2. [Planning (waypoint_updater.py)](#ii-planning-waypoint_updaterpy)
 	3. [Control (dbw_node.py)](#iii-control-dbw_nodepy)
 3. [Traffic Light Classifier](#3-traffic-light-classifier)
+	1. [Tensorflow Object Detection API Installation](#i-tensorflow-object-detection-api-installation)
+	2. [Choose and test a model from the Model Zoo](#ii-choose-and-test-a-model-from-the-model-zoo)
+	3. [Configure the pipeline.config file](#iii-configure-the-pipelineconfig-file)
+	4. [Test the training process locally](#iv-test-the-training-process-locally)
+	5. [Train with GPUs using Google Cloud Platform (GCP)](#v-train-with-gpus-using-google-cloud-platform-gcp)
+	6 [Export and test the final graph](#vi-export-and-test-the-final-graph)
 
 ## 1. Overview
 
@@ -103,9 +109,9 @@ On a high level, the steps to take are:
 - [Configure the pipeline.config file](#configure-the-pipelineconfig-file)
 - [Test the training process locally](#test-the-training-process-locally)
 - [Train with GPUs using Google Cloud Platform (GCP)](#train-with-gpus-using-google-cloud-platform-gcp)
-- Export the final graph
+- [Export and test the final graph](#export-and-test-the-final-graph)
 
-### Tensorflow Object Detection API Installation
+### i. Tensorflow Object Detection API Installation
 
   (You find the [official reference](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/installation.md) here)
 
@@ -164,7 +170,7 @@ Once installed, the API provides the following tools and scripts that we will us
 - A script to export a new "frozen_inference_graph.pb" from a fine-tuned model ([export_inference_graph.py](https://github.com/tensorflow/models/blob/master/research/object_detection/export_inference_graph.py))
 
 
-### Choose and test a model from the Model Zoo
+### ii. Choose and test a model from the Model Zoo
 (You find the [official reference](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/detection_model_zoo.md) here)
 
 In the model zoo you find a list of pre-trained models to download, as well as some basic stats regarding accuracy and speed. These models are pre-trained with datasets like the [COCO dataset](http://cocodataset.org/#home) or the [Open Images dataset](https://storage.googleapis.com/openimages/web/index.html). The COCO dataset, for example, consists of more than 200K images, with 1.5 object instances labeled within them, belonging to 80 different object categories.
@@ -185,7 +191,7 @@ General picture|Udacity Simulator
 :-:|:-:
 ![alt-text-1](imgs/pre-trained-inference-1.png "title-1") | ![alt-text-2](imgs/pre-trained-inference-2.png "title-2")
 
-### Configure the pipeline.config file
+### iii. Configure the pipeline.config file
 
  (You find the [official reference](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/configuring_jobs.md) here)
  
@@ -208,7 +214,7 @@ The `pipeline.config` file has five sections: model{...}, train_config{...}, tra
 
 If you follow this tutorial, you will first set your paths to your local folders to train the model locally. However, when you go to train the model on the cloud, you have to remember to change the paths to you GCP buckets, as described below.
 
-### Test the training process locally
+### iv. Test the training process locally
 
  (You find the [official reference](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_locally.md) here)
  
@@ -239,7 +245,7 @@ python object_detection/model_main.py \
     --alsologtostderr
 ```
 
-### Train with GPUs using Google Cloud Platform (GCP)
+### v. Train with GPUs using Google Cloud Platform (GCP)
 
  (You find the [official reference](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_on_cloud.md) here)
 
@@ -297,6 +303,13 @@ After this, running a training work on the cloud is very similar to running it l
 	    --alsologtostderr
 	```
 
+### vi. Export and test the final graph
+
+ (You find the [official reference](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/exporting_models.md) here)
+
+
+
+
 
 ---
 
@@ -323,8 +336,6 @@ The flow to get all this going includes:
 	- Download new model
 	- Export for inference
 	- Try on the tutorial notebook
-
-
 
 
 
