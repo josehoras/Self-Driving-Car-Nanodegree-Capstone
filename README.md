@@ -30,7 +30,7 @@ Our team is composed by the following members:
 	4. [Test the training process locally](#iv-test-the-training-process-locally)
 	5. [Train with GPUs using Google Cloud Platform (GCP)](#v-train-with-gpus-using-google-cloud-platform-gcp)
 	6. [Export and test the final graph](#vi-export-and-test-the-final-graph)
-6. [Final Integration]#final-integration)
+6. [Final Integration](#final-integration)
 
 ## 1. Overview
 
