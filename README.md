@@ -99,10 +99,10 @@ Although the goal of the API is to facilitate the fine-tune training of these mo
 
 On a high level, the steps to take are:
 - [Tensorflow Object Detection API Installation](#tensorflow-object-detection-api-installation)
-- [Choose a model from the Model Zoo](#choose-a-model-from-the-model-zoo)
-- Configure the pipeline.config file
-- Test the training process locally
-- Train with GPUs using Google Cloud Platform (GCP)
+- [Choose and test a model from the Model Zoo](#choose-and-test-a-model-from-the-model-zoo)
+- [Configure the pipeline.config file](#configure-the-pipelineconfig-file)
+- [Test the training process locally](#test-the-training-process-locally)
+- [Train with GPUs using Google Cloud Platform (GCP)](#train-with-gpus-using-google-cloud-platform-gcp)
 - Export the final graph
 
 #### Tensorflow Object Detection API Installation
@@ -212,6 +212,39 @@ If you follow this tutorial, you will first set your paths to your local folders
 
  (You find the [official reference](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_locally.md) here)
  
+Training without a GPU will take really too long to be practical and, even though I have a GPU on my computer, I didn't figure out how to use it with this API. Anyway, running locally is useful to test your setup, as there are lots of thing that can go wrong and the latency when sending a work to the cloud can delay a lot your debugging.
+
+Training is done using the script `model_main.py` in `tensorflow/models/research/object_detection/`. The script needs the training and evaluation data, as well as the `pipeline.config`, as described above. You will send some parameters to the script in the command line. So, first set the following environment variables from the terminal.
+
+```
+PIPELINE_CONFIG_PATH={path to pipeline config file}
+MODEL_DIR={path to fine-tuned model directory}
+NUM_TRAIN_STEPS=50000
+SAMPLE_1_OF_N_EVAL_EXAMPLES=1
+```
+
+`MODEL_DIR` points to a new folder where you want to save your new fine-tuned model. The path to the pre-trained model is already specified in your `pipeline.config` under the `fine_tune_checkpoint` parameter.
+
+Feel free to set a lower number for `NUM_TRAIN_STEPS`, as you will not have the patience to run 50000. In my system 1000 was a good number for testing purposes.
+
+Finally, you can run the script using Python from the command line:
+
+```
+# From the tensorflow/models/research/ directory
+python object_detection/model_main.py \
+    --pipeline_config_path=${PIPELINE_CONFIG_PATH} \
+    --model_dir=${MODEL_DIR} \
+    --num_train_steps=${NUM_TRAIN_STEPS} \
+    --sample_1_of_n_eval_examples=$SAMPLE_1_OF_N_EVAL_EXAMPLES \
+    --alsologtostderr
+```
+
+#### Train with GPUs using Google Cloud Platform (GCP)
+
+ (You find the [official reference](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_on_cloud.md) here)
+
+
+
 
 
 ---
