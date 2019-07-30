@@ -104,12 +104,12 @@ The Google's [Tensorflow Object Detection API](https://github.com/tensorflow/mod
 Although the goal of the API is to facilitate the fine-tune training of these model, there are still a lot of installation and configuration steps that are not trivial at all. Actually, by the time you have fully trained a model for your purposes you will have gone through a convoluted series of steps, and probably several errors. There is extensive information on the [API Readme](https://github.com/tensorflow/models/blob/master/research/object_detection/README.md). However, this information is general and in some parts lacks detail for our concrete task. So, we find useful to include belowa detailed tutorial describing our experience
 
 On a high level, the steps to take are:
-- [Tensorflow Object Detection API Installation](#i-tensorflow-object-detection-api-installation)
-- [Choose and test a model from the Model Zoo](#ii-choose-and-test-a-model-from-the-model-zoo)
-- [Configure the pipeline.config file](#iii-configure-the-pipelineconfig-file)
-- [Test the training process locally](#iv-test-the-training-process-locally)
-- [Train with GPUs using Google Cloud Platform (GCP)](#v-train-with-gpus-using-google-cloud-platform-gcp)
-- [Export and test the final graph](#vi-export-and-test-the-final-graph)
+- [i. Tensorflow Object Detection API Installation](#i-tensorflow-object-detection-api-installation)
+- [ii. Choose and test a model from the Model Zoo](#ii-choose-and-test-a-model-from-the-model-zoo)
+- [iii. Configure the pipeline.config file](#iii-configure-the-pipelineconfig-file)
+- [iv. Test the training process locally](#iv-test-the-training-process-locally)
+- [v. Train with GPUs using Google Cloud Platform (GCP)](#v-train-with-gpus-using-google-cloud-platform-gcp)
+- [vi. Export and test the final graph](#vi-export-and-test-the-final-graph)
 
 ### i. Tensorflow Object Detection API Installation
 
