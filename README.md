@@ -1,4 +1,4 @@
-## Capstone Project: Program an Autonomous Vehicle
+# Capstone Project: Program an Autonomous Vehicle
 
 [![Udacity - Self-Driving Car NanoDegree](https://s3.amazonaws.com/udacity-sdc/github/shield-carnd.svg)](http://www.udacity.com/drive)
 
@@ -14,7 +14,7 @@ Our team is composed by the following members:
 | Jean-Yves	|   jybourdon@hotmail.fr			|
 | Jose Horas	|   jose.horas@gmail.com			|
 
-### Table of Contents
+## Table of Contents
 
 1. [Overview](#overview)
 2. [System Architecture](#system-architecture)
@@ -23,7 +23,7 @@ Our team is composed by the following members:
 	3. [Control (dbw_node.py)](#control-dbw_nodepy)
 3. [Traffic Light Classifier](#traffic-light-classifier)
 
-### Overview
+## Overview
 
 In order to complete the project we program in Python the different ROS nodes. The basic structure is well described in the Udacity Walkthrough, and our implementations follows the given guidelines. This implements the basic functionality of loading the Waypoints that the car has to follow, controlling the car movement along these Waypoints, and stop the car upon encountering a red traffic light. The details of the ROS system is described in [System architecture](#system-architecture).
 
