@@ -18,9 +18,9 @@ Our team is composed by the following members:
 
 1. [Overview](#overview)
 2. [System Architecture](#system-architecture)
-	1. [Perception](#perception)
-	2. [Planning](#planning)
-	3. [Control](#control)
+	1. [Perception (tl_detector.py)](#perception-(tl_detector.py))
+	2. [Planning (waypoint_updater.py)](#planning-(waypoint_updater.py))
+	3. [Control (dbw_node.py)](#control-(dbw_node.py))
 3. [Traffic Light Classifier](#traffic-light-classifier)
 
 ### Overview
