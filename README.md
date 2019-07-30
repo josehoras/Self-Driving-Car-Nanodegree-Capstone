@@ -50,7 +50,7 @@ However, before getting into the details we describe a workaround we needed to u
 
 After implementing the basic ROS functionality the car can complete a full lap in the simulator without issues. However, to fully implement the traffic light recognition with a classifier we need to activate the camera in the simulator. With this the simulator begins to send images data to the `/image_color` topic. This data processing seems to overload our system, and a latency appears delaying the updating of the waypoints relative to the position of our car. The waypoints begin to appear on the back of the car and, as the car tries to follow these waypoints, the control subsytem get erratic and the car drives off the road.
 
-We found this problem both in the virtual machine as in a native Linux installation. It is also observed by many Udacity Nanodegree participants, as seen in these GitHub issues: [Capstone Simulator Latency #210](https://github.com/udacity/CarND-Capstone/issues/210), [turning on the camera slows car down so auto-mode gets messed up #266](https://github.com/udacity/CarND-Capstone/issues/266)
+We found this problem both in the virtual machine as in a native Linux installation. It is also observed by many Udacity Nanodegree participants, as seen in these GitHub issues: [Capstone Simulator Latency #210](https://github.com/udacity/CarND-Capstone/issues/210) and [turning on the camera slows car down so auto-mode gets messed up #266](https://github.com/udacity/CarND-Capstone/issues/266)
 
 We implemented a workaround by a little modification in one of the files provided by Udacity in the ROS System, `bridge.py`. This module builds the node `styx_server`, that creates the topics responsible to transmit different data out of the simulator. We tried first to only process some of the images received via `/image_color` but it seemed the origin of the delay was the presence of these images in the topic in the first place. Thus, we implemented the skipping logic in the topic itself, and the issue got finally solved. The code modifies the `publish_camera()` function:
 ```
@@ -360,15 +360,30 @@ python object_detection/export_inference_graph.py \
     --output_directory=${EXPORT_DIR}
 ```
 
-You have now in your ${EXPORT_DIR} the frozen graph `frozen_inference_graph.pb`. This file, together with you new `label_map.pbtxt`, is the input to the Jupyter notebook as described in section [ii. Choose and test a model from the Model Zoo](#ii-choose-and-test-a-model-from-the-model-zoo). We got the following results:
+You have now in your `${EXPORT_DIR}` the frozen graph `frozen_inference_graph.pb`. This file, together with you new `label_map.pbtxt`, is the input to the Jupyter notebook as described in section [ii. Choose and test a model from the Model Zoo](#ii-choose-and-test-a-model-from-the-model-zoo). We got the following results:
 
-General picture|Udacity Simulator
+Udacity Parking Lot | Udacity Simulator
 :-:|:-:
 ![alt-text-1](imgs/pre-trained-inference-1.png "title-1") | ![alt-text-2](imgs/pre-trained-inference-3.png "title-3")
 
 As you can see, now instead of "traffic light" we get the traffic light status as defined in our `label_map.pbtxt` :)
 
 ## 6. Final Integration
+
+The ROS system provided by Udacity reserves a space to implement the classifier in the file `tl_classifier.py`.
+
+The classifier can be implemented here with the same logic as the Object Detection Jupyter Notebook discussed above. However our implementation resembles more closely the [Udacity Object Detection Lab](https://github.com/udacity/CarND-Object-Detection-Lab). The two implementations are equivalent, but the latter is simpler, easier to read, and quicker.
+
+The fine-tuned model outputs several bounding boxes, classes, and scores corresponding to the different objects detected in the image. The scores reflects the confidence level of the detected object. We first filter the object using a confidence threshold of 80% applied to the scores. Later we decide for the remaining box with the highest score as the traffic light state present in the picture.
+
+Two libraries were equally used to process images in the dataset generation and in the ROS system: PIL and CV2. These libraries use different images formats: PIL in RGB, and CV2 in BGR. To correct this discrepancy we interchange the dimensions in the image numpy array.
+
+```
+image = np.dstack((image[:, :, 2], image[:, :, 1], image[:, :, 0]))
+```
+
+Our code also includes a conditional section to save the annotated images to disk for debugging purposes.
+
 
 
 
