@@ -17,20 +17,20 @@ Our team is composed by the following members:
 ## Table of Contents
 
 1. [Overview](#1-overview)
-2. [Workaround to avoid simulator latency issue with camera on](#workaround-to-avoid-simulator-latency-issue-with-camera-on)
-3. [ROS System Architecture](#2-ros-system-architecture)
+2. [Workaround to avoid simulator latency issue with camera on](#2-workaround-to-avoid-simulator-latency-issue-with-camera-on)
+3. [ROS System Architecture](#3-ros-system-architecture)
 	1. [Perception (tl_detector.py)](#i-perception-tl_detectorpy)
 	2. [Planning (waypoint_updater.py)](#ii-planning-waypoint_updaterpy)
 	3. [Control (dbw_node.py)](#iii-control-dbw_nodepy)
-4. [Datasets](#datasets)
-5. [Traffic Light Classifier](#3-traffic-light-classifier)
+4. [Datasets](#4-datasets)
+5. [Traffic Light Classifier](#5-traffic-light-classifier)
 	1. [Tensorflow Object Detection API Installation](#i-tensorflow-object-detection-api-installation)
 	2. [Choose and test a model from the Model Zoo](#ii-choose-and-test-a-model-from-the-model-zoo)
 	3. [Configure the pipeline.config file](#iii-configure-the-pipelineconfig-file)
 	4. [Test the training process locally](#iv-test-the-training-process-locally)
 	5. [Train with GPUs using Google Cloud Platform (GCP)](#v-train-with-gpus-using-google-cloud-platform-gcp)
 	6. [Export and test the final graph](#vi-export-and-test-the-final-graph)
-6. [Final Integration](#final-integration)
+6. [Final Integration](#6-final-integration)
 
 ## 1. Overview
 
@@ -38,13 +38,36 @@ In order to complete the project we program in Python the different ROS nodes. T
 
 After laying out the basic ROS functionality, much focus was given to implement the traffic light detection from images collected by the camera, both on the simulator and on the real testing lot. We decided in favor to use a Tensorflow model pre-trained on the general task of object detection. To prepare for this part of the project we read the previous work of [Alex Lechner](https://github.com/alex-lechner/Traffic-Light-Classification) on the Udacity Nanodegree, as well as the Medium post of [Vatsal Srivastava](https://becominghuman.ai/traffic-light-detection-tensorflow-api-c75fdbadac62). We also used their datasets for test and validation.
 
-To fine-tune this model to our task of recognizing traffic lights (red, yellow, and green) we generated thousands of labeled training images. 
+To fine-tune this model to our task of recognizing traffic lights (red, yellow, and green) we generated thousands of labeled training images. This process is described in [Datasets](#4-datasets)
 
-The training on those images was done using the Tensorflow Object Detection API and Google Cloud Platform, as described in [Traffic Light Classifier](#traffic-light-classifier).
+The training on those images was done using the Tensorflow Object Detection API and Google Cloud Platform, as described in [Traffic Light Classifier](#5-traffic-light-classifier).
 
-The integration of our Tensorflow Traffic Light Classifier into the ROS system is described in [Final Integration](#final-integration).
+The integration of our Tensorflow Traffic Light Classifier into the ROS system is described in [Final Integration](#6-final-integration).
+
+However, before getting into the details we describe a workaround we needed to use to finish our tests satisfactorily, and solve a latency problem in the simulator when the camera is switched on.
 
 ## 2. Workaround to avoid simulator latency issue with camera on
+
+After implementing the basic ROS functionality the car can complete a full lap in the simulator without issues. However, to fully implement the traffic light recognition with a classifier we need to activate the camera in the simulator. With this the simulator begins to send images data to the `/image_color` topic. This data processing seems to overload our system, and a latency appears delaying the updating of the waypoints relative to the position of our car. The waypoints begin to appear on the back of the car and, as the car tries to follow these waypoints, the control subsytem get erratic and the car drives off the road.
+
+We found this problem both in the virtual machine as in a native Linux installation. It is also observed by many Udacity Nanodegree participants, as seen in these GitHub issues: [Capstone Simulator Latency #210](https://github.com/udacity/CarND-Capstone/issues/210), [turning on the camera slows car down so auto-mode gets messed up #266](https://github.com/udacity/CarND-Capstone/issues/266)
+
+We implemented a workaround by a little modification in one of the files provided by Udacity in the ROS System, `bridge.py`. This module builds the node `styx_server`, that creates the topics responsible to transmit different data out of the simulator. We tried first to only process some of the images received via `/image_color` but it seemed the origin of the delay was the presence of these images in the topic in the first place. Thus, we implemented the skipping logic in the topic itself, and the issue got finally solved. The code modifies the `publish_camera()` function:
+```
+    def publish_camera(self, data):
+        if self.image_gap >= 3:
+            self.image_gap = 0
+            imgString = data["image"]
+            image = PIL_Image.open(BytesIO(base64.b64decode(imgString)))
+            image_array = np.asarray(image)
+    
+            image_message = self.bridge.cv2_to_imgmsg(image_array, encoding="rgb8")
+            self.publishers['image'].publish(image_message)
+        else:
+            self.image_gap += 1
+```
+
+Furthermore, the waypoints queue was reduced from 200 to 20, which also proved to speed up the simulator considerably before implementing this workaround. 
 
 ## 3. ROS System Architecture
 
