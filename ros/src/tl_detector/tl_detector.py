@@ -30,6 +30,15 @@ class TLDetector(object):
         self.lights = []
         self.img_count = 0
 
+        config_string = rospy.get_param("/traffic_light_config")
+        self.config = yaml.load(config_string)
+
+        rospy.loginfo("Is on site? %s" , self.config['is_site'])
+        if self.use_camera:
+            rospy.loginfo("Using camera")
+        else:
+            rospy.loginfo("Not using camera")
+
         sub1 = rospy.Subscriber('/current_pose', PoseStamped, self.pose_cb)
         sub2 = rospy.Subscriber('/base_waypoints', Lane, self.waypoints_cb)
 
@@ -41,25 +50,23 @@ class TLDetector(object):
         rely on the position of the light and the camera image to predict it.
         '''
         sub3 = rospy.Subscriber('/vehicle/traffic_lights', TrafficLightArray, self.traffic_cb)
-        sub6 = rospy.Subscriber('/image_color', Image, self.image_cb)
+        if self.config['is_site']:
+            sub6 = rospy.Subscriber('/image_raw', Image, self.image_cb)
+        else:
+            sub6 = rospy.Subscriber('/image_color', Image, self.image_cb)
 
-        config_string = rospy.get_param("/traffic_light_config")
-        self.config = yaml.load(config_string)
+        
         
 #        self.parameters = rospy.get_param_names()
 #        rospy.loginfo("Parameters: %s" , self.parameters)
         
-        rospy.loginfo("Is on site? %s" , self.config['is_site'])
-        if self.use_camera:
-            rospy.loginfo("Using camera")
-        else:
-            rospy.loginfo("Not using camera")
+
         
         
         self.upcoming_red_light_pub = rospy.Publisher('/traffic_waypoint', Int32, queue_size=1)
         
         self.bridge = CvBridge()
-        self.light_classifier = TLClassifier()
+        self.light_classifier = TLClassifier(self.config['is_site'])
         self.listener = tf.TransformListener()
 
         self.state = TrafficLight.UNKNOWN
@@ -187,6 +194,8 @@ class TLDetector(object):
         stop_line_positions = self.config['stop_line_positions']
         if(self.pose):
             car_wp_idx = self.get_closest_waypoint(self.pose.pose.position.x, self.pose.pose.position.y)
+        else:
+            car_wp_idx = 0
 
         #TODO find the closest visible traffic light (if one exists)
         diff = len(self.waypoints.waypoints)

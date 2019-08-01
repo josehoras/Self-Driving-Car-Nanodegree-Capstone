@@ -4,9 +4,14 @@ import numpy as np
 import cv2 
 import rospy
 
+LIGHTS = ['Green', 'Yellow', 'Red', 'Unknown', 'Unknown']
+
 class TLClassifier(object):
-    def __init__(self):
-        PATH_TO_FROZEN_GRAPH = 'light_classification/model/sim_model/'
+    def __init__(self, is_site):
+        if is_site:
+            PATH_TO_FROZEN_GRAPH = 'light_classification/model/site_model/'
+        else:
+            PATH_TO_FROZEN_GRAPH = 'light_classification/model/sim_model/'
         FROZEN_GRAPH = PATH_TO_FROZEN_GRAPH + 'frozen_inference_graph.pb'
 
         self.graph = tf.Graph()
@@ -45,9 +50,9 @@ class TLClassifier(object):
         for i in range(len(boxes)):
             top, left, bot, right = boxes[i, ...]
             cv2.rectangle(image, (left, top), (right, bot), (255,0,0), 3)
-            text = str(int(classes[i])) + ': ' + str(int(scores[i]*100)) + '%'
+            text = LIGHTS[int(classes[i])-1] + ': ' + str(int(scores[i]*100)) + '%'
             cv2.putText(image , text, (left, int(top - 5)), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (200,0,0), 1, cv2.LINE_AA)
-            cv2.putText(image , text, (10, int(50 + i * 30)), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (200,0,0), 1, cv2.LINE_AA)
+            #cv2.putText(image , text, (10, int(50 + i * 30)), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (200,0,0), 1, cv2.LINE_AA)
 
     def filter_boxes(self, min_score, boxes, scores, classes):
         """Return boxes with a confidence >= `min_score`"""
@@ -85,12 +90,12 @@ class TLClassifier(object):
             scores = np.squeeze(scores)
             classes = np.squeeze(classes)
         
-            confidence_cutoff = 0.8
+            confidence_cutoff = 0.7
             # Filter boxes with a confidence score less than `confidence_cutoff`
             boxes, scores, classes = self.filter_boxes(confidence_cutoff, boxes, scores, classes)
         
         # Write image to disk
-        write = False
+        write = True
         if write:
             image = np.dstack((image[:, :, 2], image[:, :, 1], image[:, :, 0]))
             cv2.imwrite('/home/jose/GitHub/Self-Driving-Car-Nanodegree-Capstone/images/img_raw.jpg', image)
