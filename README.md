@@ -4,7 +4,14 @@
 
 In this project we develop a system, using ROS nodes, to implement an autonomous vehicle. This system is tested on the [Udacity simulator](https://github.com/udacity/CarND-Capstone/releases) and will be tested on the real Udacity self-driving car (Carla) on project delivery.
 
-Our team is composed by the following members:
+---
+
+<p align="center">
+<img src="imgs/udacity_gif.gif" width="50%"  style="border:none;">
+</p>
+
+
+## Members of Team **"Always straight to the point!"**
 
 |  Name		| Email Address	|
 |:---------------------------------------:|:---------------------:|
@@ -12,7 +19,8 @@ Our team is composed by the following members:
 | Yan Wu		|   ianwu521@gmail.com			|
 | Ian Wang 	|   ian.immortal@gmail.com		|
 | Jean-Yves	|   jybourdon@hotmail.fr			|
-| Jose Horas	|   jose.horas@gmail.com			|
+| Jose Horas (team lead)	|   jose.horas@gmail.com			|
+
 
 ## Table of Contents
 
