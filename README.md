@@ -364,7 +364,7 @@ You have now in your `${EXPORT_DIR}` the frozen graph `frozen_inference_graph.pb
 
 Udacity Parking Lot | Udacity Simulator
 :-:|:-:
-![alt-text-1](imgs/pre-trained-inference-3.png "title-1") | ![alt-text-2](imgs/pre-trained-inference-4.png "title-3")
+![alt-text-1](imgs/pre-trained-inference-3.jpg "title-1") | ![alt-text-2](imgs/pre-trained-inference-4.png "title-3")
 
 As you can see, now instead of "traffic light" we get the traffic light status as defined in our `label_map.pbtxt` :)
 
