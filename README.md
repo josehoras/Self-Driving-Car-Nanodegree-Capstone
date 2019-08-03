@@ -73,6 +73,8 @@ We implemented a workaround by a little modification in one of the files provide
 
 Furthermore, the waypoints queue was reduced from 200 to 20, which also proved to speed up the simulator considerably before implementing this workaround. 
 
+However, this method only allowed us to get rid of the latency in a native Linux installation. On a Virtual Machine under Windows and on the Ucacity Web Workspace, the latency got better, maybe with increased values of skipped frames, but still showed after some time.
+
 ## 3. ROS System Architecture
 
 The ROS system can be divided in three main subsystems:
