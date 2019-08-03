@@ -6,8 +6,6 @@ In this project we develop a system, using ROS nodes, to implement an autonomous
 
 ## Members of Team **"Always straight to the point!"**
 
-<div align="center">
-
 |  Name		| Email Address	|
 |:---------------------------------------:|:---------------------:|
 | Andrei		|   ainfinum@gmail.com			|
@@ -15,8 +13,6 @@ In this project we develop a system, using ROS nodes, to implement an autonomous
 | Ian Wang 	|   ian.immortal@gmail.com		|
 | Jean-Yves	|   jybourdon@hotmail.fr			|
 | Jose Horas<br>(team lead)	|   jose.horas@gmail.com			|
-
-</div>
 
 ---
 
