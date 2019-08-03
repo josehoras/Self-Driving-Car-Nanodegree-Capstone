@@ -100,7 +100,7 @@ class TLClassifier(object):
             boxes, scores, classes = self.filter_boxes(confidence_cutoff, boxes, scores, classes)
         
         # Write image to disk
-        write = True
+        write = False
         if write:
             image = np.dstack((image[:, :, 2], image[:, :, 1], image[:, :, 0]))
             #cv2.imwrite('/home/jose/GitHub/Self-Driving-Car-Nanodegree-Capstone/images/img_raw.jpg', image)
