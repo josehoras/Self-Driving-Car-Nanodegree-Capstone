@@ -68,7 +68,7 @@ class TLClassifier(object):
         return filtered_boxes, filtered_scores, filtered_classes
 
 
-    def get_classification(self, image):
+    def get_classification(self, image, is_site):
         """Determines the color of the traffic light in the image
 
         Args:
@@ -79,6 +79,11 @@ class TLClassifier(object):
 
         """
         image = np.dstack((image[:, :, 2], image[:, :, 1], image[:, :, 0]))
+        if is_site:
+            width = image.shape[1]
+            height = image.shape[0]
+            #rospy.loginfo("Width: %r, height: %r" % (width, height))
+            image = image[:int(height/2), :, :]
         image_np = np.expand_dims(np.asarray(image, dtype=np.uint8), 0)
 
         with tf.Session(graph=self.graph) as sess:                
@@ -98,7 +103,7 @@ class TLClassifier(object):
         write = True
         if write:
             image = np.dstack((image[:, :, 2], image[:, :, 1], image[:, :, 0]))
-            cv2.imwrite('/home/jose/GitHub/Self-Driving-Car-Nanodegree-Capstone/images/img_raw.jpg', image)
+            #cv2.imwrite('/home/jose/GitHub/Self-Driving-Car-Nanodegree-Capstone/images/img_raw.jpg', image)
             width, height = image.shape[1], image.shape[0]
             box_coords = self.to_image_coords(boxes, height, width) 
             self.draw_boxes(image, box_coords, classes, scores)
