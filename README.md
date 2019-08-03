@@ -54,7 +54,6 @@ We found this problem both in the virtual machine as in a native Linux installat
 
 <p align="center">
 <img src="imgs/latency_problem.png" width="70%"  style="border:none;">
-![alt-text-1](imgs/latency_problem.png "title-1") 
 </p>
 
 We implemented a workaround by a little modification in one of the files provided by Udacity in the ROS System, `bridge.py`. This module builds the node `styx_server`, that creates the topics responsible to transmit different data out of the simulator. We tried first to only process some of the images received via `/image_color` but it seemed the origin of the delay was the presence of these images in the topic in the first place. Thus, we implemented the skipping logic in the topic itself, and the issue got finally solved. The code modifies the `publish_camera()` function:
