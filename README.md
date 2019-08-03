@@ -12,7 +12,7 @@ In this project we develop a system, using ROS nodes, to implement an autonomous
 | Yan Wu		|   ianwu521@gmail.com			|
 | Ian Wang 	|   ian.immortal@gmail.com		|
 | Jean-Yves	|   jybourdon@hotmail.fr			|
-| Jose Horas (team lead)	|   jose.horas@gmail.com			|
+| Jose Horas<br>(team lead)	|   jose.horas@gmail.com			|
 
 ---
 
