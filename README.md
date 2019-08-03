@@ -31,6 +31,7 @@ Our team is composed by the following members:
 	5. [Train with GPUs using Google Cloud Platform (GCP)](#v-train-with-gpus-using-google-cloud-platform-gcp)
 	6. [Export and test the final graph](#vi-export-and-test-the-final-graph)
 6. [Final Integration](#6-final-integration)
+	1. [Model Evaluation](#i-model-evaluation)
 
 ## 1. Overview
 
@@ -380,7 +381,7 @@ The ROS system provided by Udacity reserves a space to implement the classifier.
 
 The classifier can be implemented here with the same logic as the Object Detection Jupyter Notebook discussed above. However our implementation resembles more closely the [Udacity Object Detection Lab](https://github.com/udacity/CarND-Object-Detection-Lab). The two implementations are equivalent, but the latter is simpler, easier to read, and quicker.
 
-The fine-tuned model outputs several bounding boxes, classes, and scores corresponding to the different objects detected in the image. The scores reflects the confidence level of the detected object. We first filter the object using a confidence threshold of 80% applied to the scores. Later we decide for the remaining box with the highest score as the traffic light state present in the picture.
+The fine-tuned model outputs several bounding boxes, classes, and scores corresponding to the different objects detected in the image. The scores reflects the confidence level of the detected object. We first filter the object using a confidence threshold of 70% applied to the scores. Later we decide for the remaining box with the highest score as the traffic light state present in the picture.
 
 Two libraries were equally used to process images in the dataset generation and in the ROS system: PIL and CV2. These libraries use different images formats: PIL in RGB, and CV2 in BGR. To correct this discrepancy we interchange the dimensions in the image numpy array.
 
@@ -389,6 +390,16 @@ image = np.dstack((image[:, :, 2], image[:, :, 1], image[:, :, 0]))
 ```
 
 Our code also includes a conditional section to save the annotated images to disk for debugging purposes.
+
+### i. Model Evaluation
+
+We trained three different models from the model zoo: ssd_mobilenet_v1_coco, ssd_inception_v2_coco, and faster_rcnn_inception_v2_coco. As detailed in the model zoo table the more accurate the model is, the longer the evaluation time is. In our case SSD-Mobilenet is the fastest and Faster-RCNN the most accurate.
+
+We trained our models both for the simulator environment and for the real images at the Udacity site contained in the Rosbag file. 
+
+For the simulator images the SSD-Mobilenet model was quite accurate and, being the fastest, we chose it for our frozen graph.
+
+For the real site however, the accuracy was not as high and finally we decided to use Fastest-RCNN despite the higher evaluation time. To speed up the evaluation we processed only the higher half of the image, as the lower part contains the car's hood, not necessary for the task. Example videos for the classification accuracy in the different models are included in [SSD-Mobilenet](ssd_mobilenet.mp4), [SSD-Inception](ssd_inception.mp4), and [Fastest-CRNN](faster_rcnn.mp4).
 
 
 
