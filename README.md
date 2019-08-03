@@ -17,6 +17,7 @@ In this project we develop a system, using ROS nodes, to implement an autonomous
 | Jose Horas<br>(team lead)	|   jose.horas@gmail.com			|
 
 </center>
+
 ---
 
 <p align="center">
