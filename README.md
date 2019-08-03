@@ -397,7 +397,7 @@ We trained three different models from the model zoo: ssd_mobilenet_v1_coco, ssd
 
 We trained our models both for the simulator environment and for the real images at the Udacity site contained in the Rosbag file. 
 
-For the simulator images the SSD-Mobilenet model was quite accurate and, being the fastest, we chose it for our frozen graph.
+For the simulator images the SSD-Mobilenet model was quite accurate and, being the fastest, we chose it for our frozen graph. A final video with our results on the simulator and the annotated images, as well as the ROS console output, is included in [Udacity_Capstone_video](Udacity_Capstone_video.mp4).
 
 For the real site however, the accuracy was not as high and finally we decided to use Fastest-RCNN despite the higher evaluation time. To speed up the evaluation we processed only the higher half of the image, as the lower part contains the car's hood, not necessary for the task. Example videos for the classification accuracy in the different models are included in [SSD-Mobilenet](ssd_mobilenet.mp4), [SSD-Inception](ssd_inception.mp4), and [Fastest-CRNN](faster_rcnn.mp4).
 
