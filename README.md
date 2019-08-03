@@ -19,6 +19,7 @@ In this project we develop a system, using ROS nodes, to implement an autonomous
 <p align="center">
 <img src="imgs/udacity_gif.gif" width="70%"  style="border:none;">
 </p>
+
 ---
 
 ## Table of Contents
