@@ -2,14 +2,7 @@
 
 [![Udacity - Self-Driving Car NanoDegree](https://s3.amazonaws.com/udacity-sdc/github/shield-carnd.svg)](http://www.udacity.com/drive)
 
-In this project we develop a system, using ROS nodes, to implement an autonomous vehicle. This system is tested on the [Udacity simulator](https://github.com/udacity/CarND-Capstone/releases) and will be tested on the real Udacity self-driving car (Carla) on project delivery.
-
----
-
-<p align="center">
-<img src="imgs/udacity_gif.gif" width="50%"  style="border:none;">
-</p>
-
+In this project we develop a system, using ROS nodes, to implement an autonomous vehicle. Our car will follow the designated waypoints along a road, recognizes the traffic light status from camera images, and stop on red and restart driving on green. This system is tested on the [Udacity simulator](https://github.com/udacity/CarND-Capstone/releases) and will be tested on the real Udacity self-driving car (Carla) on project delivery.
 
 ## Members of Team **"Always straight to the point!"**
 
@@ -21,7 +14,12 @@ In this project we develop a system, using ROS nodes, to implement an autonomous
 | Jean-Yves	|   jybourdon@hotmail.fr			|
 | Jose Horas (team lead)	|   jose.horas@gmail.com			|
 
+---
 
+<p align="center">
+<img src="imgs/udacity_gif.gif" width="70%"  style="border:none;">
+</p>
+---
 ## Table of Contents
 
 1. [Overview](#1-overview)
