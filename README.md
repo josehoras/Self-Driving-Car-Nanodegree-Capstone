@@ -53,6 +53,7 @@ After implementing the basic ROS functionality the car can complete a full lap i
 We found this problem both in the virtual machine as in a native Linux installation. It is also observed by many Udacity Nanodegree participants, as seen in these GitHub issues: [Capstone Simulator Latency #210](https://github.com/udacity/CarND-Capstone/issues/210) and [turning on the camera slows car down so auto-mode gets messed up #266](https://github.com/udacity/CarND-Capstone/issues/266). An example of the issue at our side is shown below:
 
 <p align="center">
+<img src="imgs/latency_problem.png" width="70%"  style="border:none;">
 ![alt-text-1](imgs/latency_problem.png "title-1") 
 </p>
 
