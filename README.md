@@ -150,7 +150,9 @@ We decided to generate a dataset. We cut by 10-15 traffic lights of each color.
 
 Using OpenCV generate thousands of images by resizing traffic lights, changing contrast and brightness. As every traffic light was applied on a background by our script we could generate coordinates of drawn bounding boxes as well.
 
+<p align="center">
 <img src="imgs/red_54_b1.jpg" width="20%"  style="border:none;"> <img src="imgs/green_108_b1.jpg" width="20%"  style="border:none;">
+</p>
 
 ![alt-text-1](imgs/red_54_b1.jpg "title-1")
 ![alt-text-1](imgs/green_108_b1.jpg "title-1")
