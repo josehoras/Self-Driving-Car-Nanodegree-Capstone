@@ -8,7 +8,7 @@ In this project we develop a system, using ROS nodes, to implement an autonomous
 
 |  Name		| Email Address	|
 |:---------------------------------------:|:---------------------:|
-| Andrei		|   ainfinum@gmail.com			|
+| Andrei Sasinovich	|   ainfinum@gmail.com			|
 | Yan Wu		|   ianwu521@gmail.com			|
 | Ian Wang 	|   ian.immortal@gmail.com		|
 | Jean-Yves	|   jybourdon@hotmail.fr			|
