@@ -138,6 +138,22 @@ The calculated throttle, brake, and steering are published to the topics:
 
 ## 4. Datasets
 
+After we got our dataset of images from the simulator and rosbag we started to think how to label it. The first option was label it by hand but when we look into the number of collected images (more than 1k) we decided that it’s not a good way as we have other work to do 😊
+
+We decided to generate a dataset. We cut by 10-15 traffic lights of each color.
+
+![alt-text-1](imgs/green_tl.jpg "title-1")
+![alt-text-1](imgs/red_tl.jpg "title-1")
+![alt-text-1](imgs/yellow.jpg "title-1")
+![alt-text-1](imgs/red_sim.jpg "title-1")
+![alt-text-1](imgs/green_sim.jpg "title-1")
+
+Using OpenCV generate thousands of images by resizing traffic lights, changing contrast and brightness. As every traffic light was applied on a background by our script we could generate coordinates of drawn bounding boxes as well.
+
+![alt-text-1](imgs/red_54_b1.jpg "title-1")
+![alt-text-1](imgs/green_108_b1.jpg "title-1")
+ 
+TFRecord file was created on the fly by packing all our info into TF format using tensorflow function tf.train.Example
 
 ## 5. Traffic Light Classifier
 
